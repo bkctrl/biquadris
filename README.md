@@ -1,7 +1,4 @@
 <!-- PROJECT LOGO -->
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 <br />
 <div align="center">
   <a href="https://github.com/bkctrl/biquadris">
@@ -60,7 +57,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae dictum l
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="githum.com/bkctrl"><img src="https://avatars.githubusercontent.com/u/112859636?v=4?s=100" width="100px;" alt="BK Kang"/><br /><sub><b>BK Kang</b></sub></a><br /><a href="https://github.com/bkctrl/biquadris/commits?author=bkctrl" title="Code">💻📖📆👀</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="githum.com/bkctrl"><img src="https://avatars.githubusercontent.com/u/112859636?v=4?s=100" width="100px;" alt="BK Kang"/><br /><sub><b>BK Kang</b></sub></a><br /><a href="https://github.com/bkctrl/biquadris/commits?author=bkctrl" title="Code"></a></td>
     </tr>
   </tbody>
 </table>
