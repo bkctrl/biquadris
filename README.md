@@ -53,6 +53,23 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae dictum l
 
 
 
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+
+[![All Contributors](https://img.shields.io/github/all-contributors/projectOwner/projectName?color=ee8449&style=flat-square)](#contributors)
+
+
+
+
 ### Built With
 <a href=""><img src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white"></a>
 <a href=""><img src="https://img.shields.io/static/v1?label=&message=X11&color=%23F28834&style=for-the-badge&logo=X.org&logoColor=white" alt="X11"></a>
