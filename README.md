@@ -54,9 +54,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae dictum l
 
 
 ### Built With
-[[![C++][C++]][C++-url]==](https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<img src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white">
+<p align="right">(<a href="#readme-top">back to< top</a>)</p>
 
 
 
