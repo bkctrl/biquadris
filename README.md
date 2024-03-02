@@ -8,7 +8,7 @@
 <h3 align="center">Biquadris</h3>
 
   <p align="center">
-  A Latinization of the video game Tetris expanded for two player competition.    <br />
+  A Latinization of the video game Tetris expanded for two player competition.    <br/><br/>
     <a href="DEMO LINK, TO BE UPDATED AFTER WE'RE DONE"><strong>View Demo »</strong></a>
     <br />
     <br />
