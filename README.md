@@ -44,11 +44,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae dictum lorem. Proin dui enim, efficitur sit amet hendrerit non, rutrum dapibus diam. Suspendisse potenti. Nulla facilisi. 
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -75,15 +70,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae dictum l
 <!-- GETTING STARTED -->
 ## Getting Started
 
-[EXPLAIN HOW THE PROJECT SHOULD BE SET UP LOCALLY]
 
 ### Prerequisites
 
-[PREREQUISITES, e.g. X11]
 
 ### Installation
 
-[INSTALLATION STEPS]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -105,19 +97,3 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae dictum l
     - [ ] Nested Feature
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
