@@ -6,8 +6,8 @@
 class TextDisplay : public Observer {
 public:
     TextDisplay(); //MIL
-    // update OR notify function
-    
+    // update OR notify function (i think its the notify function)
+
     ~TextDisplay() override;
     
 };
