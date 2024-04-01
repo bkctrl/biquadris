@@ -5,9 +5,11 @@
 
 class TextDisplay : public Observer {
 public:
-    // TextDisplay( *); MIL
-    // ~TextDisplay() override;
-    // add more stuff 
+    TextDisplay(); //MIL
+    // update OR notify function
+    
+    ~TextDisplay() override;
+    
 };
 
 #endif
