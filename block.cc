@@ -77,9 +77,13 @@ IBlock::IBlock(int numLevel) {
 
 void IBlock::init() {
   blockCells.push_back(new Cell(0, 0)); 
+  Cell(0,0).setLetter('I');
   blockCells.push_back(new Cell(1, 0));
+  Cell(1,0).setLetter('I');
   blockCells.push_back(new Cell(2, 0));
+  Cell(2,0).setLetter('I');
   blockCells.push_back(new Cell(3, 0));
+  Cell(3,0).setLetter('I');
 }
 
 void IBlock::rotateClkwise() {
@@ -119,9 +123,13 @@ JBlock::JBlock(int numLevel) {
 
 void JBlock::init() {
   blockCells.push_back(new Cell(0, 0));
+  Cell(0,0).setLetter('J');
   blockCells.push_back(new Cell(0, 1));
+  Cell(0,1).setLetter('J');
   blockCells.push_back(new Cell(1, 1));
+  Cell(1,1).setLetter('J');
   blockCells.push_back(new Cell(2, 1));
+  Cell(2,1).setLetter('J');
 }
 
 void JBlock::rotateClkwise() {
@@ -161,9 +169,13 @@ LBlock::LBlock(int numLevel) {
 
 void LBlock::init() {
   blockCells.push_back(new Cell(2, 0)); 
+  Cell(2,0).setLetter('L');
   blockCells.push_back(new Cell(0, 1));
+  Cell(0,1).setLetter('L');
   blockCells.push_back(new Cell(1, 1));
+  Cell(1,1).setLetter('L');
   blockCells.push_back(new Cell(2, 1));
+  Cell(2,1).setLetter('L');
 }
 
 void LBlock::rotateClkwise() {
@@ -201,9 +213,13 @@ OBlock::OBlock(int numLevel) {
 
 void OBlock::init() {
   blockCells.push_back(new Cell(0, 0));
+  Cell(0,0).setLetter('O');
   blockCells.push_back(new Cell(1, 0));
+  Cell(1,0).setLetter('O');
   blockCells.push_back(new Cell(0, 1));
+  Cell(0,1).setLetter('O');
   blockCells.push_back(new Cell(1, 1));
+  Cell(1,1).setLetter('O');
 }
 
 void OBlock::rotateClkwise() {
@@ -244,9 +260,13 @@ SBlock::SBlock(int numLevel) {
 
 void SBlock::init() {
   blockCells.push_back(new Cell(0, 0));
+  Cell(0,0).setLetter('S');
   blockCells.push_back(new Cell(1, 0));
+  Cell(1,0).setLetter('S');
   blockCells.push_back(new Cell(1, 1));
+  Cell(1,1).setLetter('S');
   blockCells.push_back(new Cell(2, 1));
+  Cell(2,1).setLetter('S');
 }
 
 void SBlock::rotateClkwise() {
@@ -286,9 +306,13 @@ ZBlock::ZBlock(int numLevel) {
 
 void ZBlock::init() {
   blockCells.push_back(new Cell(1, 0));
+  Cell(1,0).setLetter('Z');
   blockCells.push_back(new Cell(2, 0));
+  Cell(2,0).setLetter('Z');
   blockCells.push_back(new Cell(0, 1));
+  Cell(0,1).setLetter('Z');
   blockCells.push_back(new Cell(1, 1));
+  Cell(1,1).setLetter('Z');
 }
 
 void ZBlock::rotateClkwise() {
@@ -326,9 +350,13 @@ TBlock::TBlock(int numLevel) {
 
 void TBlock::init() {
   blockCells.push_back(new Cell(1, 0));
+  Cell(1,0).setLetter('T');
   blockCells.push_back(new Cell(0, 1));
+  Cell(0,1).setLetter('T');
   blockCells.push_back(new Cell(1, 1));
+  Cell(1,1).setLetter('T');
   blockCells.push_back(new Cell(2, 1));
+  Cell(2,1).setLetter('T');
 }
 
 void TBlock::rotateClkwise() {
@@ -367,6 +395,7 @@ StarBlock::StarBlock(int numLevel) {
 
 void StarBlock::init() {
   blockCells.push_back(new Cell(0, 0));
+  Cell(0,0).setLetter('*');
 }
 
 void StarBlock::rotateClkwise() {
