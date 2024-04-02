@@ -8,10 +8,11 @@
 // add Heavy
 // add StarBlock class
 
-enum blockType {I,J,L,O,S,Z,T};
+enum blockType {I,J,L,O,S,Z,T,STAR};
 
 class Block  : public Observer {
   protected:
+    int level;
     blockType type;
     bool isHeavy = false;
     std::vector<Cell*> blockCells; // contains the coordinates the cells cover 
@@ -19,7 +20,8 @@ class Block  : public Observer {
 
   public:
     blockType getType() const { return type; } // return the type of block
-    Block(blockType type) : type(type) {} // default parametric constructor
+    Block() {}
+    Block(int level) : level(level) {} 
     virtual void init(); // intialize shape and position
     virtual void rotateClkwise(); 
     virtual void rotateCounterClkwise();
@@ -27,8 +29,8 @@ class Block  : public Observer {
     virtual void shiftRight(int px); // shift right by n pixels
     virtual void shiftUp(int px); // shift up by n pixels
     virtual void shiftDown(int px); // shift down by n pixels
-    virtual void display() const; // display block 
     virtual ~Block();
+
   // observer methods
   void attach(Observer* observer) {
     observers.emplace_back(observer);
@@ -51,7 +53,7 @@ class Block  : public Observer {
 
 class IBlock : public Block {
   public:
-    IBlock();
+    IBlock(int numLevel);
     ~IBlock();
     void init() override;
     blockType getType() const { return type; }
@@ -61,12 +63,11 @@ class IBlock : public Block {
     void shiftRight(int px) override;
     void shiftUp(int px) override;
     void shiftDown(int px) override;
-    void display() const override;
 };
 
 class JBlock : public Block {
   public:
-    JBlock();
+    JBlock(int numLevel);
     ~JBlock();
     void init();
     blockType getType() const { return type; }
@@ -76,12 +77,11 @@ class JBlock : public Block {
     void shiftRight(int px) override;
     void shiftUp(int px) override;
     void shiftDown(int px) override;
-    void display() const override;
 };
 
 class LBlock : public Block {
   public:
-    LBlock();
+    LBlock(int numLevel);
     ~LBlock();
     void init() override;
     blockType getType() const { return type; }
@@ -91,12 +91,11 @@ class LBlock : public Block {
     void shiftRight(int px) override;
     void shiftUp(int px) override;
     void shiftDown(int px) override;
-    void display() const override;
 };
 
 class OBlock : public Block {
   public:
-    OBlock();
+    OBlock(int numLevel);
     ~OBlock();
     void init() override;
     blockType getType() const { return type; }
@@ -106,12 +105,11 @@ class OBlock : public Block {
     void shiftRight(int px) override;
     void shiftUp(int px) override;
     void shiftDown(int px) override;
-    void display() const override;
 };
 
 class SBlock : public Block {
   public:
-    SBlock();
+    SBlock(int numLevel);
     ~SBlock();
     void init() override;
     blockType getType() const { return type; }
@@ -121,12 +119,11 @@ class SBlock : public Block {
     void shiftRight(int px) override;
     void shiftUp(int px) override;
     void shiftDown(int px) override;
-    void display() const override;
 };
 
 class ZBlock : public Block {
   public:
-    ZBlock();
+    ZBlock(int numLevel);
     ~ZBlock();
     void init() override;
     blockType getType() const { return type; }
@@ -136,12 +133,11 @@ class ZBlock : public Block {
     void shiftRight(int px) override;
     void shiftUp(int px) override;
     void shiftDown(int px) override;
-    void display() const override;
 };
 
 class TBlock : public Block {
   public:
-    TBlock();
+    TBlock(int numLevel);
     ~TBlock();
     void init() override;
     blockType getType() const { return type; }
@@ -151,18 +147,20 @@ class TBlock : public Block {
     void shiftRight(int px) override;
     void shiftUp(int px) override;
     void shiftDown(int px) override;
-    void display() const override;
+};
+
+class StarBlock : public Block {
+  public:
+    StarBlock(int numLevel);
+    ~StarBlock();
+    void init() override;
+    blockType getType() const { return type; }
+    void rotateClkwise() override;
+    void rotateCounterClkwise() override;
+    void shiftLeft(int px) override;
+    void shiftRight(int px) override;
+    void shiftUp(int px) override;
+    void shiftDown(int px) override;
 };
 
 #endif
-
-
-// you need to have individual init for each block since they are displayed differently 
-// block has virtual init func that does nothing, specifics are implemented in its subclasses that override the init method
-
-// block has a vector of pointers to cells called blockCells 
-// this vector contains the coordinates the cells cover (cell contains itself's coordinate information inside cell class)
-
-// cell knows about the changes
-// grid cares about the changes (ex. to clear row(s))
-

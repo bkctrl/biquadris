@@ -1,5 +1,14 @@
 {
     "files.associations": {
+        "*.embeddedhtml": "html",
+        "*.rmd": "markdown",
+        "stdio.h": "c",
+        "string.h": "c",
+        "complex": "cpp",
+        "iomanip": "cpp",
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "ios": "cpp",
         "__bit_reference": "cpp",
         "__bits": "cpp",
         "__config": "cpp",
@@ -22,7 +31,6 @@
         "clocale": "cpp",
         "cmath": "cpp",
         "compare": "cpp",
-        "complex": "cpp",
         "concepts": "cpp",
         "cstdarg": "cpp",
         "cstddef": "cpp",
@@ -35,9 +43,6 @@
         "cwctype": "cpp",
         "exception": "cpp",
         "initializer_list": "cpp",
-        "ios": "cpp",
-        "iosfwd": "cpp",
-        "iostream": "cpp",
         "istream": "cpp",
         "limits": "cpp",
         "locale": "cpp",
@@ -59,6 +64,8 @@
         "unordered_map": "cpp",
         "variant": "cpp",
         "vector": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "__verbose_abort": "cpp",
+        "execution": "cpp"
     }
 }

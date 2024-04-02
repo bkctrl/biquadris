@@ -2,6 +2,7 @@
 
 // to-do : implement display() in each block
 
+
 Block::~Block() {
   for (Cell* cell : blockCells) {
     delete cell;
@@ -63,22 +64,26 @@ void Block::shiftDown(int px) {
   notify();
 }
 
-void Block::display() const {
 
-}
 
 
 // IBlock
 
-IBlock::IBlock() : Block(I) {
+IBlock::IBlock(int numLevel) {
+  type = I;
+  level = numLevel;
   init(); 
 }
 
 void IBlock::init() {
   blockCells.push_back(new Cell(0, 0)); 
+  Cell(0,0).setLetter('I');
   blockCells.push_back(new Cell(1, 0));
+  Cell(1,0).setLetter('I');
   blockCells.push_back(new Cell(2, 0));
+  Cell(2,0).setLetter('I');
   blockCells.push_back(new Cell(3, 0));
+  Cell(3,0).setLetter('I');
 }
 
 void IBlock::rotateClkwise() {
@@ -105,22 +110,26 @@ void IBlock::shiftDown(int px) {
   Block::shiftDown(px);
 }
 
-void IBlock::display() const {
 
-}
 
 
 // JBlock
 
-JBlock::JBlock() : Block(J) {
+JBlock::JBlock(int numLevel) {
+  type = J;
+  level = numLevel;
   init(); 
 }
 
 void JBlock::init() {
   blockCells.push_back(new Cell(0, 0));
+  Cell(0,0).setLetter('J');
   blockCells.push_back(new Cell(0, 1));
+  Cell(0,1).setLetter('J');
   blockCells.push_back(new Cell(1, 1));
+  Cell(1,1).setLetter('J');
   blockCells.push_back(new Cell(2, 1));
+  Cell(2,1).setLetter('J');
 }
 
 void JBlock::rotateClkwise() {
@@ -147,22 +156,26 @@ void JBlock::shiftDown(int px) {
   Block::shiftDown(px);
 }
 
-void JBlock::display() const {
 
-}
 
 
 // LBlock
 
-LBlock::LBlock() : Block(L) {
+LBlock::LBlock(int numLevel) {
+  type = L;
+  level = numLevel;
   init(); 
 }
 
 void LBlock::init() {
   blockCells.push_back(new Cell(2, 0)); 
+  Cell(2,0).setLetter('L');
   blockCells.push_back(new Cell(0, 1));
+  Cell(0,1).setLetter('L');
   blockCells.push_back(new Cell(1, 1));
+  Cell(1,1).setLetter('L');
   blockCells.push_back(new Cell(2, 1));
+  Cell(2,1).setLetter('L');
 }
 
 void LBlock::rotateClkwise() {
@@ -189,22 +202,24 @@ void LBlock::shiftDown(int px) {
   Block::shiftDown(px);
 }
 
-void LBlock::display() const {
-
-}
-
 
 // OBlock
 
-OBlock::OBlock() : Block(O) {
+OBlock::OBlock(int numLevel) {
+  type = O;
+  level = numLevel;
   init(); 
 }
 
 void OBlock::init() {
   blockCells.push_back(new Cell(0, 0));
+  Cell(0,0).setLetter('O');
   blockCells.push_back(new Cell(1, 0));
+  Cell(1,0).setLetter('O');
   blockCells.push_back(new Cell(0, 1));
+  Cell(0,1).setLetter('O');
   blockCells.push_back(new Cell(1, 1));
+  Cell(1,1).setLetter('O');
 }
 
 void OBlock::rotateClkwise() {
@@ -231,23 +246,27 @@ void OBlock::shiftDown(int px) {
   Block::shiftDown(px);
 }
 
-void OBlock::display() const {
 
-}
 
 
 
 // SBlock
 
-SBlock::SBlock() : Block(S) {
+SBlock::SBlock(int numLevel) {
+  type = S;
+  level = numLevel;
   init(); 
 }
 
 void SBlock::init() {
   blockCells.push_back(new Cell(0, 0));
+  Cell(0,0).setLetter('S');
   blockCells.push_back(new Cell(1, 0));
+  Cell(1,0).setLetter('S');
   blockCells.push_back(new Cell(1, 1));
+  Cell(1,1).setLetter('S');
   blockCells.push_back(new Cell(2, 1));
+  Cell(2,1).setLetter('S');
 }
 
 void SBlock::rotateClkwise() {
@@ -274,22 +293,26 @@ void SBlock::shiftDown(int px) {
   Block::shiftDown(px);
 }
 
-void SBlock::display() const {
 
-}
 
 
 // ZBlock
 
-ZBlock::ZBlock() : Block(Z) {
+ZBlock::ZBlock(int numLevel) {
+  type = Z;
+  level = numLevel;
   init(); 
 }
 
 void ZBlock::init() {
   blockCells.push_back(new Cell(1, 0));
+  Cell(1,0).setLetter('Z');
   blockCells.push_back(new Cell(2, 0));
+  Cell(2,0).setLetter('Z');
   blockCells.push_back(new Cell(0, 1));
+  Cell(0,1).setLetter('Z');
   blockCells.push_back(new Cell(1, 1));
+  Cell(1,1).setLetter('Z');
 }
 
 void ZBlock::rotateClkwise() {
@@ -316,23 +339,24 @@ void ZBlock::shiftDown(int px) {
   Block::shiftDown(px);
 }
 
-void ZBlock::display() const {
-
-}
-
-
 
 // TBlock
 
-TBlock::TBlock() : Block(T) {
+TBlock::TBlock(int numLevel) {
+  type = T;
+  level = numLevel;
   init(); 
 }
 
 void TBlock::init() {
   blockCells.push_back(new Cell(1, 0));
+  Cell(1,0).setLetter('T');
   blockCells.push_back(new Cell(0, 1));
+  Cell(0,1).setLetter('T');
   blockCells.push_back(new Cell(1, 1));
+  Cell(1,1).setLetter('T');
   blockCells.push_back(new Cell(2, 1));
+  Cell(2,1).setLetter('T');
 }
 
 void TBlock::rotateClkwise() {
@@ -359,8 +383,42 @@ void TBlock::shiftDown(int px) {
   Block::shiftDown(px);
 }
 
-void TBlock::display() const {
 
+
+// StarBlock
+
+StarBlock::StarBlock(int numLevel) {
+  type = STAR;
+  level = numLevel;
+  init(); 
 }
 
-// star block '*' needed for level 4
+void StarBlock::init() {
+  blockCells.push_back(new Cell(0, 0));
+  Cell(0,0).setLetter('*');
+}
+
+void StarBlock::rotateClkwise() {
+  Block::rotateClkwise();
+}
+
+void StarBlock::rotateCounterClkwise() {
+  Block::rotateCounterClkwise();
+}
+
+void StarBlock::shiftLeft(int px) {
+  Block::shiftLeft(px);
+}
+
+void StarBlock::shiftRight(int px) {
+  Block::shiftRight(px);
+}
+
+void StarBlock::shiftUp(int px) {
+  Block::shiftUp(px);
+}
+
+void StarBlock::shiftDown(int px) {
+  Block::shiftDown(px);
+}
+
