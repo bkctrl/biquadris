@@ -22,7 +22,7 @@ void Grid::init() { // for setting initial state of the grid
 std::ostream& operator<<(std::ostream& out, const Grid& grid) {
     out << *grid.td;
     return out;
-}*/ 
+} 
 
 ostream &operator<<(ostream &out, const Grid &g) {
   out << *g.td; // output grid;
