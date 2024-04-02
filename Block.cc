@@ -363,3 +363,4 @@ void TBlock::display() const {
 
 }
 
+// star block '*' needed for level 4
