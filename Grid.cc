@@ -2,9 +2,8 @@
 
 // grid needs an overloaded<< operator to display the board (aka grid)
 
-
 // code doesnt work: rough idea only
-/* Grid::Grid(int width, int height) : width(width), height(height) {
+Grid::Grid(int width, int height) : width(width), height(height) {
     init();
 }
 
@@ -21,12 +20,7 @@ void Grid::init() { // for setting initial state of the grid
 }
 
 std::ostream& operator<<(std::ostream& out, const Grid& grid) {
-    for (const auto& row : grid.theGrid) {
-        for (const auto& cell : row) {
-            out << cell; // Assuming Cell has an overloaded operator<<
-        }
-        out << '\n';
-    }
+    out << *grid.td;
     return out;
 }*/ 
 
