@@ -3,6 +3,7 @@
 
 #include "Observer.h"
 #include <vector>
+class Cell;
 
 class Subject {
     std::vector<Observer*> observers;
@@ -15,4 +16,4 @@ public:
     virtual ~Subject();
 };
 
-#endif // SUBJECT_H
+#endif // SUBJECT_H 

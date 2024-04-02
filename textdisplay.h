@@ -2,13 +2,15 @@
 #define TEXTDISPLAY_H
 
 #include "observer.h"
+#include <string>
 
 class TextDisplay : public Observer {
 public:
     TextDisplay(); //MIL
-    // update OR notify function (i think its the notify function)
-
+    // some sort of update function to update the texts 
+    friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
     ~TextDisplay() override;
+    
     
 };
 

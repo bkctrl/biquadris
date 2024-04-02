@@ -1,0 +1,3 @@
+
+// int currentScore
+// int highScore

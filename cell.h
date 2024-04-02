@@ -15,6 +15,7 @@ public:
     bool getType() const; // 
     int getRow() const; // Returns the row number
     int getCol() const; // Returns the column number
+    bool isFilled(); // check if this particualr cell is full
     void notify(Cell &c) override; // Notify changes on certain condition
     // or just have getcoords 
     void setType(char); // Sets the type of cell 
