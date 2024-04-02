@@ -24,9 +24,10 @@ int main(const int argc, const char* argv[]) {
       // Starts the game in level argv[i+1]
     }
   }
+  // get user input from cin
   string user_input;
-  while (cin >> user_input) {
-    interpreter.interpretCommand(user_input);
+  while (getline(cin, user_input)) {
+    cmdInterpreter.interpretCommand(user_input); // a method that processes user input
     grid.display();
   }
 }
