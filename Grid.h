@@ -15,3 +15,27 @@
 // block is only indepdent when its first added to the grid, other times its part of grid. grid will handle it on its own 
 
 // textdisplay are a bunch of functions that prints the grid
+
+#ifndef GRID_H
+#define GRID_H
+
+#include <vector>
+#include <iostream>
+#include "cell.h"
+#include "textdisplay.h"
+
+class Grid {
+private:
+    int width;
+    int height;
+    std::vector<std::vector<Cell>> theGrid;
+    TextDisplay *td;
+
+public:
+    Grid(int width, int height);
+    void init(); // for setting initial state of the grid
+
+    friend std::ostream& operator<<(std::ostream& out, const Grid& grid);
+};
+
+#endif // GRID_H

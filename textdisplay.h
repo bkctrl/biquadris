@@ -13,8 +13,6 @@ public:
     // various functions that display the component
     void displayboard(); // displays the grid 
     ~TextDisplay() override;
-    
-    
 };
 
 #endif
