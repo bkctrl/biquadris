@@ -16,7 +16,8 @@ void Grid::init() { // for setting initial state of the grid
             theGrid[i][j].setCoords(i, j); // Assuming Cell has a setCoords method
             // Initialize other cell properties if needed
         }
-    }
+    } 
+    attach observer 
 }
 
 std::ostream& operator<<(std::ostream& out, const Grid& grid) {
@@ -28,3 +29,8 @@ std::ostream& operator<<(std::ostream& out, const Grid& grid) {
     }
     return out;
 }*/ 
+
+ostream &operator<<(ostream &out, const Grid &g) {
+  out << *g.td; // output grid;
+  return out; // alwasy return in or out 
+}
