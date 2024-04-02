@@ -9,7 +9,7 @@
 class Block;
 
 class Level {
-    int levelNum; // maybe not needed not too sure
+    //int levelNum; // maybe not needed not too sure
     protected:
     int blockCounter; // for level 4
     std::vector<char> blockSequence; // for level 0
