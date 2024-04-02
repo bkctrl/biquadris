@@ -21,7 +21,7 @@ public:
     // or just have getcoords 
     void setType(char); // Sets the type of cell 
     void setCoords(int r, int c); // Sets the cell's coordinates
-
+    
     ~Cell();
 };
 

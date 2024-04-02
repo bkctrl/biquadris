@@ -5,6 +5,8 @@
 #include "observer.h"
 #include <vector>
 
+// to-do : fix error at line 29 (virtual ~Block();)
+
 enum blockType {I,J,L,O,S,Z,T};
 
 class Block  : public Observer {
@@ -16,7 +18,6 @@ class Block  : public Observer {
   public:
     blockType getType() const { return type; } // return the type of block
     Block(blockType type) : type(type) {} // default parametric constructor
-    virtual ~Block();
     virtual void init(); // intialize shape and position
     virtual void rotateClkwise(); 
     virtual void rotateCounterClkwise();
@@ -25,7 +26,7 @@ class Block  : public Observer {
     virtual void shiftUp(int px); // shift up by n pixels
     virtual void shiftDown(int px); // shift down by n pixels
     virtual void display() const; // display block 
-
+    virtual ~Block();
   // observer methods
   void attach(Observer* observer) {
     observers.emplace_back(observer);
@@ -49,6 +50,7 @@ class Block  : public Observer {
 class IBlock : public Block {
   public:
     IBlock();
+    ~IBlock();
     void init() override;
     blockType getType() const { return type; }
     void rotateClkwise() override;
@@ -63,7 +65,8 @@ class IBlock : public Block {
 class JBlock : public Block {
   public:
     JBlock();
-    void init() override;
+    ~JBlock();
+    void init();
     blockType getType() const { return type; }
     void rotateClkwise() override;
     void rotateCounterClkwise() override;
@@ -77,6 +80,7 @@ class JBlock : public Block {
 class LBlock : public Block {
   public:
     LBlock();
+    ~LBlock();
     void init() override;
     blockType getType() const { return type; }
     void rotateClkwise() override;
@@ -91,6 +95,7 @@ class LBlock : public Block {
 class OBlock : public Block {
   public:
     OBlock();
+    ~OBlock();
     void init() override;
     blockType getType() const { return type; }
     void rotateClkwise() override;
@@ -105,6 +110,7 @@ class OBlock : public Block {
 class SBlock : public Block {
   public:
     SBlock();
+    ~SBlock();
     void init() override;
     blockType getType() const { return type; }
     void rotateClkwise() override;
@@ -119,6 +125,7 @@ class SBlock : public Block {
 class ZBlock : public Block {
   public:
     ZBlock();
+    ~ZBlock();
     void init() override;
     blockType getType() const { return type; }
     void rotateClkwise() override;
@@ -133,6 +140,7 @@ class ZBlock : public Block {
 class TBlock : public Block {
   public:
     TBlock();
+    ~TBlock();
     void init() override;
     blockType getType() const { return type; }
     void rotateClkwise() override;
