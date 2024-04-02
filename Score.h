@@ -1,3 +1,15 @@
+#ifndef SCORE_H
+#define SCORE_H
 
-// int currentScore
-// int highScore
+class Score {
+    int currentScore;
+    int hiScore;
+public:
+    Score();
+    void addScore(int);
+    int getCurrentScore();
+    int getHighScore();
+    void resetScore();
+};
+
+#endif 
