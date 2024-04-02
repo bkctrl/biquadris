@@ -7,3 +7,4 @@
 
 // cell knows about the changes
 // grid cares about the changes (ex. to clear row(s))
+// remember to add implementation for star block (as required for level 4)
