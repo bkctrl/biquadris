@@ -5,13 +5,15 @@
 #include "observer.h"
 #include <vector>
 
-// to-do : fix error at line 29 (virtual ~Block();)
+// add Heavy
+// add StarBlock class
 
 enum blockType {I,J,L,O,S,Z,T};
 
 class Block  : public Observer {
   protected:
     blockType type;
+    bool isHeavy = false;
     std::vector<Cell*> blockCells; // contains the coordinates the cells cover 
     std::vector<Observer*> observers; // list of observers
 
