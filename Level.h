@@ -4,10 +4,11 @@
 #include <iostream>
 #include <memory>
 #include <cstdlib>
-#include "Block.h"
+
+class Block;
 
 class Level {
-    int levelNum;
+    int levelNum; // maybe not needed not too sure
     protected:
     int blockCounter; // for level 4
     std::vector<char> blockSequence; // for level 0
@@ -16,11 +17,13 @@ class Level {
     std::string FileName; 
     
     public: 
-    Level(int levelNum, const std::string& FileName);
-    int getLevelnum() const; 
-    virtual void setSource(std::istream *in) = 0;
+    // maybe default ctor not needed: Level(int levelNum, const std::string& FileName);
+    Block * createBlock (char, int); // creates block based on the specifc type and input it to the corresponding level
+
+    // int getLevelnum() const; 
+    //virtual void setSource(std::istream *in) = 0;
     virtual bool splitBlock(int blockCounter); // drops the star block
-    virtual Block getBlock();
+    virtual Block * getBlock() = 0;
     ~Level() = default; 
     
 };
