@@ -10,14 +10,15 @@ void level0::setSequenceFiles(const std::string& sequence1, const std::string& s
 }
 
 void level0::loadSequence(const std::string& filename, std::vector<char>& sequence) {
-    std::ifstream fileStream(filename);
+    /* std::ifstream fileStream(filename);
     char content;
     while (fileStream >> content) {
-        sequence.push_back(blockType);
-    }
+        sequence.push_back(content);
+    } */
 }
 
-Block* level0::getBlock(bool isPlayerOne) {
+Block* level0::getBlock() {
+    bool isPlayerOne;
     std::vector<char>& sequence = isPlayerOne ? sequencePlayer1 : sequencePlayer2;
     size_t& index = isPlayerOne ? indexP1 : indexP2;
 
