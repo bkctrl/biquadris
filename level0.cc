@@ -4,6 +4,11 @@
 level0::level0(bool PlayerOne, std::string sequence1, std::string sequence2):  
     Playerindex{0} {
     char PlayerSequence;
+    /*if (PlayerOne){
+        std::string sequenceFile = sequence1;
+    } else {
+        std::string sequenceFile = sequence2;
+    } */
     std::string sequenceFile = PlayerOne ? sequence1 : sequence2;  
     std::ifstream file{sequenceFile};
     while (file >> PlayerSequence) {

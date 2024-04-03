@@ -23,9 +23,10 @@ Block * Level::createBlock(char charInput, int levelNum){
         return new TBlock{levelNum};
     } else if (charInput == 'O'){
         return new SBlock{levelNum};
-    } else if (charInput == '*'){
-        return new StarBlock{levelNum};
-    }
+    } 
+    // else if (charInput == '*'){
+    //     return new StarBlock{levelNum};
+    // }
 }
 void Level::setSeed(int newSeed){
     seed = newSeed;

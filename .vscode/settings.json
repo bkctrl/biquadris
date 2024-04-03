@@ -67,6 +67,9 @@
         "algorithm": "cpp",
         "__verbose_abort": "cpp",
         "execution": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "deque": "cpp",
+        "fstream": "cpp",
+        "stack": "cpp"
     }
 }
