@@ -23,3 +23,4 @@ std::ostream& operator<<(std::ostream& out, const Grid& grid) {
     out << *grid.td;
     return out;
 }
+

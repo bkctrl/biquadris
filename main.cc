@@ -6,7 +6,7 @@
 
 int main(const int argc, const char* argv[]) {
   // initialize grid and command interpreter
-  Grid grid(18, 11);
+  Grid grid();
   // CommandInterpreter cmdInterpreter(&grid); 
   // command-line interface
 //   for (int i = 1; i < argc; ++i) {

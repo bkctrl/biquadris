@@ -63,14 +63,14 @@ void Block::shiftDown(int px) {
   notify();
 }
 
+void Block::display() const {
 
+}
 
 
 // IBlock
 
-IBlock::IBlock(int numLevel) {
-  type = I;
-  level = numLevel;
+IBlock::IBlock() : Block(I) {
   init(); 
 }
 
@@ -105,14 +105,14 @@ void IBlock::shiftDown(int px) {
   Block::shiftDown(px);
 }
 
+void IBlock::display() const {
 
+}
 
 
 // JBlock
 
-JBlock::JBlock(int numLevel) {
-  type = J;
-  level = numLevel;
+JBlock::JBlock() : Block(J) {
   init(); 
 }
 
@@ -147,14 +147,14 @@ void JBlock::shiftDown(int px) {
   Block::shiftDown(px);
 }
 
+void JBlock::display() const {
 
+}
 
 
 // LBlock
 
-LBlock::LBlock(int numLevel) {
-  type = L;
-  level = numLevel;
+LBlock::LBlock() : Block(L) {
   init(); 
 }
 
@@ -189,12 +189,14 @@ void LBlock::shiftDown(int px) {
   Block::shiftDown(px);
 }
 
+void LBlock::display() const {
+
+}
+
 
 // OBlock
 
-OBlock::OBlock(int numLevel) {
-  type = O;
-  level = numLevel;
+OBlock::OBlock() : Block(O) {
   init(); 
 }
 
@@ -229,15 +231,15 @@ void OBlock::shiftDown(int px) {
   Block::shiftDown(px);
 }
 
+void OBlock::display() const {
 
+}
 
 
 
 // SBlock
 
-SBlock::SBlock(int numLevel) {
-  type = S;
-  level = numLevel;
+SBlock::SBlock() : Block(S) {
   init(); 
 }
 
@@ -272,14 +274,14 @@ void SBlock::shiftDown(int px) {
   Block::shiftDown(px);
 }
 
+void SBlock::display() const {
 
+}
 
 
 // ZBlock
 
-ZBlock::ZBlock(int numLevel) {
-  type = Z;
-  level = numLevel;
+ZBlock::ZBlock() : Block(Z) {
   init(); 
 }
 
@@ -314,12 +316,15 @@ void ZBlock::shiftDown(int px) {
   Block::shiftDown(px);
 }
 
+void ZBlock::display() const {
+
+}
+
+
 
 // TBlock
 
-TBlock::TBlock(int numLevel) {
-  type = T;
-  level = numLevel;
+TBlock::TBlock() : Block(T) {
   init(); 
 }
 
@@ -354,41 +359,8 @@ void TBlock::shiftDown(int px) {
   Block::shiftDown(px);
 }
 
+void TBlock::display() const {
 
-
-// StarBlock
-
-StarBlock::StarBlock(int numLevel) {
-  type = STAR;
-  level = numLevel;
-  init(); 
 }
 
-void StarBlock::init() {
-  blockCells.push_back(new Cell(0, 0));
-}
-
-void StarBlock::rotateClkwise() {
-  Block::rotateClkwise();
-}
-
-void StarBlock::rotateCounterClkwise() {
-  Block::rotateCounterClkwise();
-}
-
-void StarBlock::shiftLeft(int px) {
-  Block::shiftLeft(px);
-}
-
-void StarBlock::shiftRight(int px) {
-  Block::shiftRight(px);
-}
-
-void StarBlock::shiftUp(int px) {
-  Block::shiftUp(px);
-}
-
-void StarBlock::shiftDown(int px) {
-  Block::shiftDown(px);
-}
-
+// star block '*' needed for level 4
