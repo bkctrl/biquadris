@@ -28,11 +28,11 @@ class Grid {
 private:
     int width;
     int height;
-    std::vector<std::vector<Cell>> theGrid;
-    TextDisplay *td;
+    std::vector<std::vector<Cell>> theGrid; // this stores the actual cells within each 18x11 fixed-sized grid for current player
+    TextDisplay *td; // textdisplay that 
 
 public:
-    Grid(int width, int height);
+    Grid(int height, int width);
     void init(); // for setting initial state of the grid
 
     friend std::ostream& operator<<(std::ostream& out, const Grid& grid);

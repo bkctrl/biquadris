@@ -1,7 +1,12 @@
-#include "Level.h"
+#include <string>
+#include <iostream>
+#include <fstream>
+#include "level.h"
+#include "block.h"
+
+// 
 // include the various block subclasses
 
-using namespace std;
 
 Block * Level::createBlock(char charInput, int levelNum){
     if (charInput == 'I'){
@@ -22,5 +27,30 @@ Block * Level::createBlock(char charInput, int levelNum){
         return new StarBlock{levelNum};
     }
 }
+void Level::setSeed(int newSeed){
+    seed = newSeed;
+    srand(seed);
+}
+// would it be possible to make seed available for all fucntions at once
 
-// I,S,J,Z,L,T,O,* 
+// I,S,J,Z,L,T,O,STAR
+
+// would same logic apply for random and norandom functions? 
+
+void Level::norandom(std::string filename) {
+    readsFile = true;
+
+    std::ifstream file{filename};
+    char letter;
+    while (file >> letter) {
+        sequence.push_back(letter);
+    }
+}
+
+void Level::random() {
+    readsFile = false;
+    index = 0;
+    sequence.clear();
+}
+
+Level::~Level() = default; // proper handling of virtual dtor 
