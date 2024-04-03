@@ -6,7 +6,7 @@
 #include "subject.h"
 
 class Cell : public Observer , public Subject {
-    std::string letter;
+    char letter;
     std::vector<Observer*> observers; 
     int r, c; // Row and column
 

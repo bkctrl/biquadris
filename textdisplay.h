@@ -3,10 +3,11 @@
 
 #include "observer.h"
 #include "subject.h"
+#include "cell.h"
 #include <string>
 
 class TextDisplay : public Observer, public Subject {
-    std::vector<std::vector<char>> theDisplay;
+    std::vector< std::vector<char> > theDisplay;
     const int width;
     const int height;
 public:
@@ -18,7 +19,6 @@ public:
     void displayboard(); // displays the grid 
     ~TextDisplay() override;
     friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
-    
 };
 
 #endif

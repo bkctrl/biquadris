@@ -2,36 +2,33 @@
 #include <iostream>
 #include <string>
 
+TextDisplay::TextDisplay(int width, int height) : width(width), height(height) {
+  theDisplay = std::vector< std::vector<char> >(height, std::vector<char>(width, ' '));
+}
 
-// implement the helper functions here
+TextDisplay::~TextDisplay() {}
 
+void TextDisplay::notify(Cell &c) {
+  int row = c.getRow();
+  int col = c.getCol();
+  theDisplay[row][col] = c.isFilled() ? ' ' : c.getLetter();
+}
 
-/*void TextDisplay::displayboard(){
-    // list of the helper functions goes here
-    // 
-    std::cout << grid;
-}*/
-
-// std::ostream &operator<<(std::ostream &out, const TextDisplay &td){
-//     td.theDisplay;
-    
-// }
+void TextDisplay::displayboard() {
+  for (const auto &row : theDisplay) { // for every row
+    for (char cell : row) { // for every cell in each row
+      std::cout << cell;
+    }
+    std::cout << std::endl;
+  }
+}
 
 std::ostream &operator<<(std::ostream &out, const TextDisplay &td) {
-  for (int i = 0; i < td.height; ++i) {
-    for (int j = 0; j < td.width; ++j) {
-      out << td.theDisplay[i][j];
+  for (const auto &row : td.theDisplay) { // for every row
+    for (char cell : row) { // for every cell in each row
+      out << cell;
     }
-    out << std::endl; // out << '\n'
+    out << std::endl;
   }
   return out;
 }
-
-// have gameengine handle players and the boards for each player, within board you have: 
-        // level
-        // score 
-        // ------ (divider)
-        // game component (size 18*11)
-        // -------
-        // Next block: 
-        // shows the block 

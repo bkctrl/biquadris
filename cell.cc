@@ -1,8 +1,8 @@
 #include "Cell.h"
 
-Cell::Cell() : letter(" "), r(0), c(0) {}
+Cell::Cell() : letter(' '), r(0), c(0) {}
 
-Cell::Cell(int row, int col) : letter(" "), r(row), c(col) {}
+Cell::Cell(int row, int col) : letter(' '), r(row), c(col) {}
 
 Cell::~Cell() {}
 
@@ -24,7 +24,7 @@ int Cell::getCol() const {
 }
 
 bool Cell::isFilled() {
-  if (letter == " ") {
+  if (letter == ' ') {
     return false;
   } else {
     return true;
