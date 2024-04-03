@@ -1,6 +1,6 @@
-#include "Cell.h"
+#include "cell.h"
 
-Cell::Cell() : letter(' '), r(0), c(0) {}
+// Cell::Cell() : letter(' '), r(0), c(0) {}
 
 Cell::Cell(int row, int col) : letter(' '), r(row), c(col) {}
 

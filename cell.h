@@ -6,13 +6,12 @@
 #include "subject.h"
 
 class Cell : public Observer , public Subject {
-    char letter;
+    char letter = ' ';
     std::vector<Observer*> observers; 
     int r, c; // Row and column
 
 public:
-    Cell();
-    Cell(int r, int c); // parametric ctor (ADDED WITH BLOCK BRANCH)
+    Cell(int r = 0, int c = 0); // parametric ctor (ADDED WITH BLOCK BRANCH)
     void setLetter(char c); // set letter to c
     char getLetter(); 
     bool getType() const; // 

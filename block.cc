@@ -1,6 +1,9 @@
-#include "Block.h"
+#include "block.h"
 
 // to-do : implement display() in each block
+Block::Block(int level) : lvl(lvl) {}
+
+// Block::blockType getType() { return type; } // return the type of block
 
 Block::~Block() {
   for (Cell* cell : blockCells) {
@@ -70,8 +73,8 @@ void Block::display() const {
 
 // IBlock
 
-IBlock::IBlock() : Block(I) {
-  init(); 
+IBlock::IBlock(int lvl) : Block(lvl) {
+  init();
 }
 
 void IBlock::init() {

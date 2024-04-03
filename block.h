@@ -16,10 +16,12 @@ class Block  : public Observer {
     bool isHeavy = false;
     std::vector<Cell*> blockCells; // contains the coordinates the cells cover 
     std::vector<Observer*> observers; // list of observers
+    int lvl;
 
   public:
     blockType getType() const { return type; } // return the type of block
-    Block(blockType type) : type(type) {} // default parametric constructor
+    // Block(blockType type) : type(type) {} // default parametric constructor
+    explicit Block(int level);
     virtual void init(); // intialize shape and position
     virtual void rotateClkwise(); 
     virtual void rotateCounterClkwise();

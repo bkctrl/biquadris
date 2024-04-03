@@ -13,3 +13,4 @@ class CommandInterpreter {
 
 
 #endif // COMMANDINTERPRETER_H
+// take command and do shit/notify the gameengine 
