@@ -14,15 +14,13 @@ class Cell : public Observer , public Subject {
 public:
     Cell();
     Cell(int r, int c); // parametric ctor (ADDED WITH BLOCK BRANCH)
-    void setLetter(char c); // set letter to c
+    void setLetter(string c); // set letter to c
     string getLetter(); 
     bool getType() const; // 
     int getRow() const; // Returns the row number
     int getCol() const; // Returns the column number
     bool isFilled(); // check if this particualr cell is full
-    void notify(Cell &c) override; // Notify changes on certain condition
-    // or just have getcoords 
-    void setType(char); // Sets the type of cell 
+    void notifyAll(Cell &c); // Notify changes on certain condition or just have getcoords 
     void setCoords(int r, int c); // Sets the cell's coordinates
     ~Cell();
 };
