@@ -7,7 +7,6 @@
 using namespace std;
 
 class Cell : public Observer , public Subject {
-    bool isOn;
     string letter;
     vector<Observer*> observers; 
     int r, c; // Row and column

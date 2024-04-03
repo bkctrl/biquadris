@@ -1,7 +1,7 @@
 #include "Block.h"
 
-// to-do : implement display() in each block
-
+// check if block cannot be shifted right/left
+// implement rotation funcs
 
 Block::~Block() {
   for (Cell* cell : blockCells) {
@@ -27,6 +27,34 @@ void Block::rotateCounterClkwise() {
   }
   notify();
 }
+
+// void Block::rotateClkwise() {
+//     // Transpose the block
+//     for (int i = 0; i < size; i++) {
+//         for (int j = i; j < size; j++) {
+//             std::swap(matrix[i][j], matrix[j][i]);
+//         }
+//     }
+
+//     // Reverse each row
+//     for (int i = 0; i < size; i++) {
+//         std::reverse(matrix[i].begin(), matrix[i].end());
+//     }
+// }
+
+// void Block::rotateCounterClockwise() {
+//     // Reverse each row
+//     for (int i = 0; i < size; i++) {
+//         std::reverse(matrix[i].begin(), matrix[i].end());
+//     }
+
+//     // Transpose the block
+//     for (int i = 0; i < size; i++) {
+//         for (int j = i; j < size; j++) {
+//             std::swap(matrix[i][j], matrix[j][i]);
+//         }
+//     }
+// }
 
 // to-do : check if can't be shifted further
 void Block::shiftLeft(int px) {
@@ -77,13 +105,10 @@ IBlock::IBlock(int numLevel) {
 
 void IBlock::init() {
   blockCells.push_back(new Cell(0, 0)); 
-  Cell(0,0).setLetter('I');
   blockCells.push_back(new Cell(1, 0));
-  Cell(1,0).setLetter('I');
   blockCells.push_back(new Cell(2, 0));
-  Cell(2,0).setLetter('I');
   blockCells.push_back(new Cell(3, 0));
-  Cell(3,0).setLetter('I');
+  for (Cell* cell : blockCells) cell->setLetter(I);
 }
 
 void IBlock::rotateClkwise() {
@@ -123,13 +148,10 @@ JBlock::JBlock(int numLevel) {
 
 void JBlock::init() {
   blockCells.push_back(new Cell(0, 0));
-  Cell(0,0).setLetter('J');
+  blockCells.push_back(new Cell(1, 0));
+  blockCells.push_back(new Cell(2, 0));
   blockCells.push_back(new Cell(0, 1));
-  Cell(0,1).setLetter('J');
-  blockCells.push_back(new Cell(1, 1));
-  Cell(1,1).setLetter('J');
-  blockCells.push_back(new Cell(2, 1));
-  Cell(2,1).setLetter('J');
+  for (Cell* cell : blockCells) cell->setLetter('J');
 }
 
 void JBlock::rotateClkwise() {
@@ -168,14 +190,11 @@ LBlock::LBlock(int numLevel) {
 }
 
 void LBlock::init() {
-  blockCells.push_back(new Cell(2, 0)); 
-  Cell(2,0).setLetter('L');
-  blockCells.push_back(new Cell(0, 1));
-  Cell(0,1).setLetter('L');
-  blockCells.push_back(new Cell(1, 1));
-  Cell(1,1).setLetter('L');
-  blockCells.push_back(new Cell(2, 1));
-  Cell(2,1).setLetter('L');
+  blockCells.push_back(new Cell(0, 0));
+  blockCells.push_back(new Cell(1, 0));
+  blockCells.push_back(new Cell(2, 0));
+  blockCells.push_back(new Cell(2, 2)); 
+  for (Cell* cell : blockCells) cell->setLetter('L');
 }
 
 void LBlock::rotateClkwise() {
@@ -213,13 +232,10 @@ OBlock::OBlock(int numLevel) {
 
 void OBlock::init() {
   blockCells.push_back(new Cell(0, 0));
-  Cell(0,0).setLetter('O');
   blockCells.push_back(new Cell(1, 0));
-  Cell(1,0).setLetter('O');
   blockCells.push_back(new Cell(0, 1));
-  Cell(0,1).setLetter('O');
   blockCells.push_back(new Cell(1, 1));
-  Cell(1,1).setLetter('O');
+  for (Cell* cell : blockCells) cell->setLetter('O');
 }
 
 void OBlock::rotateClkwise() {
@@ -260,13 +276,10 @@ SBlock::SBlock(int numLevel) {
 
 void SBlock::init() {
   blockCells.push_back(new Cell(0, 0));
-  Cell(0,0).setLetter('S');
   blockCells.push_back(new Cell(1, 0));
-  Cell(1,0).setLetter('S');
   blockCells.push_back(new Cell(1, 1));
-  Cell(1,1).setLetter('S');
   blockCells.push_back(new Cell(2, 1));
-  Cell(2,1).setLetter('S');
+  for (Cell* cell : blockCells) cell->setLetter('S');
 }
 
 void SBlock::rotateClkwise() {
@@ -306,13 +319,10 @@ ZBlock::ZBlock(int numLevel) {
 
 void ZBlock::init() {
   blockCells.push_back(new Cell(1, 0));
-  Cell(1,0).setLetter('Z');
   blockCells.push_back(new Cell(2, 0));
-  Cell(2,0).setLetter('Z');
   blockCells.push_back(new Cell(0, 1));
-  Cell(0,1).setLetter('Z');
   blockCells.push_back(new Cell(1, 1));
-  Cell(1,1).setLetter('Z');
+  for (Cell* cell : blockCells) cell->setLetter('L');
 }
 
 void ZBlock::rotateClkwise() {
@@ -350,13 +360,9 @@ TBlock::TBlock(int numLevel) {
 
 void TBlock::init() {
   blockCells.push_back(new Cell(1, 0));
-  Cell(1,0).setLetter('T');
   blockCells.push_back(new Cell(0, 1));
-  Cell(0,1).setLetter('T');
   blockCells.push_back(new Cell(1, 1));
-  Cell(1,1).setLetter('T');
   blockCells.push_back(new Cell(2, 1));
-  Cell(2,1).setLetter('T');
 }
 
 void TBlock::rotateClkwise() {
@@ -395,7 +401,6 @@ StarBlock::StarBlock(int numLevel) {
 
 void StarBlock::init() {
   blockCells.push_back(new Cell(0, 0));
-  Cell(0,0).setLetter('*');
 }
 
 void StarBlock::rotateClkwise() {
