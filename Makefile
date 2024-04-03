@@ -7,8 +7,8 @@ EXEC = biquadris
 
 # took this from A4 q1q2, need to change the flags 
 ${EXEC}: ${OBJECTS}
-	# ${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC} # for textdisplay 
-	 ${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC} -lX11 # for graphicdisplay
+	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC} # for textdisplay 
+	 # ${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC} -lX11 # for graphicdisplay
 
 -include ${DEPENDS}
 
