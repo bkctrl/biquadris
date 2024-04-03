@@ -2,11 +2,10 @@
 #include <string>
 #include "grid.h"
 // #include "commandinterpreter.h"
-using namespace std;
 
 int main(const int argc, const char* argv[]) {
   // initialize grid and command interpreter
-  Grid grid(18, 11);
+  Grid grid();
   // CommandInterpreter cmdInterpreter(&grid); 
   // command-line interface
 //   for (int i = 1; i < argc; ++i) {
@@ -24,7 +23,7 @@ int main(const int argc, const char* argv[]) {
 //       // Starts the game in level argv[i+1]
 //     }
 //   }
-    cout << grid;
+    std::cout << grid;
   // get user input from cin
   /*string user_input;
   while (getline(cin, user_input)) {
