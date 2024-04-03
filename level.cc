@@ -1,7 +1,11 @@
-#include "Level.h"
+#include <string>
+#include <iostream>
+#include "level.h"
+
+class Block;
+
 // include the various block subclasses
 
-using namespace std;
 
 Block * Level::createBlock(char charInput, int levelNum){
     if (charInput == 'I'){
@@ -22,5 +26,10 @@ Block * Level::createBlock(char charInput, int levelNum){
         return new StarBlock{levelNum};
     }
 }
+void Level::setSeed(int newSeed){
+    seed = newSeed;
+    srand(seed);
+}
+
 
 // I,S,J,Z,L,T,O,STAR

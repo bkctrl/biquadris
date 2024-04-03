@@ -1,20 +1,18 @@
 #ifndef LEVEL0_H
 #define LEVEL0_H
 
-#include "Level.h"
+#include "level.h"
 #include <vector>
 #include <string>
 
 class level0 : public Level {
-    int indexP1; 
-    int indexP2;
-    std::vector<char> sequencePlayer1;
-    std::vector<char> sequencePlayer2;
+    int Playerindex;
+    std::vector<char> sequence;
+    std::vector<char> Player1;
+    std::vector<char> Player2;
     public:
-    level0();
-    void loadSequence(const std::string& filename, std::vector<char>& sequence);
-    void setSequenceFiles(const std::string& sequence1, const std::string& sequence2);
-    Block * getBlock() override;
+    level0(bool,std::string,std::string);
+    Block * getBlock() override; // supposed to add override but for some reason isnt recognized
     ~level0() = default;
 };
 

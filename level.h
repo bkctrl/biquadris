@@ -1,12 +1,10 @@
 #ifndef LEVEL_H
 #define LEVEL_H 
-#include "Block.h"
 #include <string>
 #include <iostream>
 #include <memory>
 #include <cstdlib>
 
-class Block;
 
 class Level {
     //int levelNum; // maybe not needed not too sure
@@ -20,12 +18,13 @@ class Level {
     public: 
     // maybe default ctor not needed: Level(int levelNum, const std::string& FileName);
     Block * createBlock (char, int); // creates block based on the specifc type and input it to the corresponding level
+    void setSeed(int);
 
     // int getLevelnum() const; 
     //virtual void setSource(std::istream *in) = 0;
     virtual bool splitBlock(int blockCounter); // drops the star block
     virtual Block * getBlock() = 0;
-    ~Level() = default; 
+    virtual ~Level() = default; 
     
 };
 

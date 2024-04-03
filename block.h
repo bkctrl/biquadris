@@ -20,7 +20,7 @@ class Block  : public Observer {
 
   public:
     blockType getType() const { return type; } // return the type of block
-    Block() {}
+    Block() {}; 
     Block(int level) : level(level) {} 
     virtual void init(); // intialize shape and position
     virtual void rotateClkwise(); 

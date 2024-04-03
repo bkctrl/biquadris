@@ -1,38 +1,70 @@
 #include "level0.h"
+#include <fstream>
 
-using namespace std;
-
-level0::level0() : indexP1(0), indexP2(0) {}
-
-void level0::setSequenceFiles(const std::string& sequence1, const std::string& sequence2) {
-    loadSequence(sequence1, sequencePlayer1);
-    loadSequence(sequence2, sequencePlayer2);
+level0::level0(bool PlayerOne, std::string sequence1, std::string sequence2):  
+    Playerindex{0} {
+    char PlayerSequence;
+    std::string sequenceFile = PlayerOne ? sequence1 : sequence2;  
+    std::ifstream file{sequenceFile};
+    while (file >> PlayerSequence) {
+        sequence.push_back(PlayerSequence);
+    }
 }
 
-void level0::loadSequence(const std::string& filename, std::vector<char>& sequence) {
-    /* std::ifstream fileStream(filename);
-    char content;
-    while (fileStream >> content) {
-        sequence.push_back(content);
-    } */
+Block * level0::getBlock() {
+    Block * level0Block = createBlock(sequence[Playerindex], 0);
+    Playerindex++; // reset index to 0 if size reached
+    if (Playerindex >= sequence.size()) {
+        Playerindex = 0;
+    }
+    return level0Block;
 }
 
-Block* level0::getBlock() {
-    bool isPlayerOne;
-    std::vector<char>& sequence = isPlayerOne ? sequencePlayer1 : sequencePlayer2;
-    size_t& index = isPlayerOne ? indexP1 : indexP2;
 
-    Block* newBlock = createBlock(sequence[index], 0);
+// make two players, each player stores their sequence 
+// the sequence of each player is cycled through level0::getblock() 
+// 
 
-    index++; 
+// push_back would add the contents of input file to a vector 
+
+// emplace_back is used for adding to a list of observers 
+
+/*
+level0::level0(const string& sequence1, const string& sequence2): indexP1(0), indexP2(0) {
+    loadSequence(sequence1, Player1);
+    loadSequence(sequence2, Player2);
+}
+
+void level0::loadSequence(const string& filename, vector<char>& sequence) {
+    ifstream file {filename};
+    char letter;
+    while (file >> letter) {
+        sequence.push_back(letter);
+    }
+}
+
+Block * level0::getBlock() {
+    int index = 0;
+    vector<char>& sequence 
+    Block * newBlock = createBlock(sequence[index], 0);
+
+    index++; // increase index, reset to zero if past end of vector
     if (index >= sequence.size()) {
         index = 0;
     }
 
     return newBlock;
-}
+}  */
 
+/*
+Block* level0::getBlock(bool isPlayerOne) {
+    vector<char>& currentSequence = isPlayerOne ? Player1 : Player2;
+    size_t& currentIndex = isPlayerOne ? indexP1 : indexP2;
 
-// push_back would add the contents of input file to a vector 
+    if (currentIndex >= currentSequence.size()) {
+        currentIndex = 0; // Reset the index if at the end of the sequence
+    }
 
-// emplace_back is used for adding to a list of observers 
+    char blockType = currentSequence[currentIndex++];
+    return new Block(blockType, 0); // Replace with actual block creation
+} */

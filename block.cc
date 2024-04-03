@@ -2,7 +2,6 @@
 
 // to-do : implement display() in each block
 
-
 Block::~Block() {
   for (Cell* cell : blockCells) {
     delete cell;
