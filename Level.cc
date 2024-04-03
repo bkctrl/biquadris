@@ -1,8 +1,6 @@
 #include "Level.h"
 // include the various block subclasses
 
-using namespace std;
-
 Block * Level::createBlock(char charInput, int levelNum){
     if (charInput == 'I'){
         return new IBlock{levelNum};

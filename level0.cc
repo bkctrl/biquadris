@@ -1,7 +1,5 @@
 #include "level0.h"
 
-using namespace std;
-
 level0::level0() : indexP1(0), indexP2(0) {}
 
 void level0::setSequenceFiles(const std::string& sequence1, const std::string& sequence2) {
