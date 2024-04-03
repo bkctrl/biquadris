@@ -1,5 +1,5 @@
-#ifndef LEVEL0_H
-#define LEVEL0_H
+#ifndef LEVEL1_H
+#define LEVEL1_H
 
 #include "level.h"
 #include <cstdlib>
