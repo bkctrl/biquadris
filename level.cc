@@ -23,4 +23,4 @@ Block * Level::createBlock(char charInput, int levelNum){
     }
 }
 
-// I,S,J,Z,L,T,O,STAR
+// I,S,J,Z,L,T,O,* 
