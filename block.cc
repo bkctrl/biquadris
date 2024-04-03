@@ -115,7 +115,7 @@ void IBlock::display() const {
 
 // JBlock
 
-JBlock::JBlock() : Block(J) {
+JBlock::JBlock(int lvl) : Block(lvl) {
   init(); 
 }
 
@@ -157,7 +157,7 @@ void JBlock::display() const {
 
 // LBlock
 
-LBlock::LBlock() : Block(L) {
+LBlock::LBlock(int lvl) : Block(lvl) {
   init(); 
 }
 
@@ -199,7 +199,7 @@ void LBlock::display() const {
 
 // OBlock
 
-OBlock::OBlock() : Block(O) {
+OBlock::OBlock(int lvl) : Block(lvl) {
   init(); 
 }
 
@@ -242,7 +242,7 @@ void OBlock::display() const {
 
 // SBlock
 
-SBlock::SBlock() : Block(S) {
+SBlock::SBlock(int lvl) : Block(lvl) {
   init(); 
 }
 
@@ -284,7 +284,7 @@ void SBlock::display() const {
 
 // ZBlock
 
-ZBlock::ZBlock() : Block(Z) {
+ZBlock::ZBlock(int lvl) : Block(lvl) {
   init(); 
 }
 
@@ -327,7 +327,7 @@ void ZBlock::display() const {
 
 // TBlock
 
-TBlock::TBlock() : Block(T) {
+TBlock::TBlock(int lvl) : Block(lvl) {
   init(); 
 }
 

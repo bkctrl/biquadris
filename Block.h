@@ -21,7 +21,7 @@ class Block  : public Observer {
   public:
     blockType getType() const { return type; } // return the type of block
     // Block(blockType type) : type(type) {} // default parametric constructor
-    explicit Block(int level);
+    Block(int level);
     virtual void init(); // intialize shape and position
     virtual void rotateClkwise(); 
     virtual void rotateCounterClkwise();
@@ -53,7 +53,7 @@ class Block  : public Observer {
 
 class IBlock : public Block {
   public:
-    IBlock();
+    IBlock(int lvl);
     ~IBlock();
     void init() override;
     blockType getType() const { return type; }
@@ -68,7 +68,7 @@ class IBlock : public Block {
 
 class JBlock : public Block {
   public:
-    JBlock();
+    JBlock(int lvl);
     ~JBlock();
     void init();
     blockType getType() const { return type; }
@@ -83,7 +83,7 @@ class JBlock : public Block {
 
 class LBlock : public Block {
   public:
-    LBlock();
+    LBlock(int lvl);
     ~LBlock();
     void init() override;
     blockType getType() const { return type; }
@@ -98,7 +98,7 @@ class LBlock : public Block {
 
 class OBlock : public Block {
   public:
-    OBlock();
+    OBlock(int lvl);
     ~OBlock();
     void init() override;
     blockType getType() const { return type; }
@@ -113,7 +113,7 @@ class OBlock : public Block {
 
 class SBlock : public Block {
   public:
-    SBlock();
+    SBlock(int lvl);
     ~SBlock();
     void init() override;
     blockType getType() const { return type; }
@@ -128,7 +128,7 @@ class SBlock : public Block {
 
 class ZBlock : public Block {
   public:
-    ZBlock();
+    ZBlock(int lvl);
     ~ZBlock();
     void init() override;
     blockType getType() const { return type; }
@@ -143,7 +143,7 @@ class ZBlock : public Block {
 
 class TBlock : public Block {
   public:
-    TBlock();
+    TBlock(int lvl);
     ~TBlock();
     void init() override;
     blockType getType() const { return type; }
