@@ -1,17 +1,17 @@
 #include "Cell.h"
 
-Cell::Cell() : letter(""), r(0), c(0) {}
+Cell::Cell() : letter(' '), r(0), c(0) {}
 
-Cell::Cell(int row, int col) : letter(""), r(row), c(col) {}
+Cell::Cell(int row, int col) : letter(' '), r(row), c(col) {}
 
 Cell::~Cell() {}
 
-void Cell::setLetter(string c) {
+void Cell::setLetter(char c) {
   letter = c;
   update();
 }
 
-string Cell::getLetter() {
+char Cell::getLetter() {
   return letter;
 }
 
@@ -24,7 +24,7 @@ int Cell::getCol() const {
 }
 
 bool Cell::isFilled() {
-  if (letter == "") {
+  if (letter == ' ') {
     return false;
   } else {
     return true;
