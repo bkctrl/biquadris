@@ -12,12 +12,12 @@ class level3 : public Level {
     bool isHeavy;
     bool isRandom;
 public:
-    level3() = default;
+    level3();
     Block * getBlock() override;
-    void norandom(std::string);
-    void random();
+   //  void norandom(std::string) override;
+    // void random() override;
     char randomChar();
-    ~level3() = default;
+    //~level3() = default;
 };
 
 #endif //LEVEL3_H

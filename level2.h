@@ -5,10 +5,10 @@
 
 class level2 : public Level {
 public:
-    level2() = default;
+    //level2() = default;
     Block * getBlock() override;
     char randomChar(); 
-    ~level2() = default;
+    //~level2() = default;
 };
 
 #endif

@@ -8,9 +8,9 @@
 
 class level1: public Level {
     public:
-    level1() = default;
+    //level1() = default;
     Block * getBlock() override;
-    ~level1() = default;
+    //~level1() = default;
     char randomChar(); 
 }; 
 #endif

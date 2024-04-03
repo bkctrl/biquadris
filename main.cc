@@ -32,3 +32,32 @@ int main(const int argc, const char* argv[]) {
     grid.display();
   }*/
 }
+
+
+/*
+heavy for level3/4 example (need to apply this code more than once)
+if (playerOne->getLevel() >= 3){
+  playerOne->getCurBlock()->down();
+  }
+*/
+
+ /*if (cmd == "left") {
+                if (playerOneTurn){
+                    playerOne->getCurBlock()->left();
+                    if (playerOne->getLevel() >= 3){
+                        playerOne->getCurBlock()->down();
+                    } */
+
+// special actions:
+// ApplyForce()
+// ApplyHeavy() 
+// ApplyBlind()
+// each would return the respective 
+
+
+// there would be a def for bool Force
+/* bool Grid::setForce(bool toggleForce){
+      Force = toggleForce;
+}*/
+// same logic applies to blind 
+

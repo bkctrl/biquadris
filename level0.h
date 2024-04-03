@@ -13,7 +13,7 @@ class level0 : public Level {
     public:
     level0(bool,std::string,std::string);
     Block * getBlock() override; // supposed to add override but for some reason isnt recognized
-    ~level0() = default;
+    //~level0() = default;
 };
 
 #endif

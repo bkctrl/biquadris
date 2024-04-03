@@ -4,21 +4,6 @@
 
 level3::level3(): readsFile{false} {}
 
-void level3::norandom(std::string filename) { // similar to level0 MIL
-    readsFile = true;
-    char PlayerSequence;
-    std::ifstream file{filename};
-    while (file >> PlayerSequence) {
-        sequence.push_back(PlayerSequence);
-    }
-}
-
-void level3::random() {
-    index = 0;
-    readsFile = false;
-    sequence.clear(); 
-}
-
 char level3::randomChar() {
     int r = rand() % 9;
     if (r < 1) {
@@ -33,7 +18,7 @@ char level3::randomChar() {
         return 'S';
     } else if (r < 7) {
         return 'I';
-    } else { // if (r < 9) {
+    } else {  
         return 'Z';
     }
 }
