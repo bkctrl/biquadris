@@ -23,10 +23,9 @@ class Block : public Observer, public Subject {
 
   public:
       blockType getType() const { return type; } // return the type of block
-      // Block(blockType type) : type(type) {} // default parametric constructor
       Block(int level);
       Block(int level, const char letter);
-      bool isValidMove(vector<Cell *> updatedBlockCells, char charInput);
+      bool isValidMove(std::vector<Cell *> updatedBlockCells, char charInput);
       virtual void init(); // intialize shape and position
       virtual void rotateClkwise(); 
       virtual void rotateCounterClkwise();
@@ -36,24 +35,7 @@ class Block : public Observer, public Subject {
       virtual void shiftDown(int px); // shift down by n pixels
       virtual void display() const; // display block 
       virtual ~Block();
-    // observer methods
       void update(Subject &subject) override;
-  // void attach(Observer* observer) {
-  //   observers.emplace_back(observer);
-  // }
-  // void detach(Observer* observer) {
-  //   for (auto it = observers.begin(); it != observers.end(); ++it) {
-  //     if (*it == observer) {
-  //       observers.erase(it);
-  //       break;
-  //     }
-  //   }
-  // }
-  // void notify() {
-  //   for (Observer* observer : observers) {
-  //       observer->update();
-  //   }
-  // }
 };
 
 
@@ -169,15 +151,20 @@ class TBlock : public Block {
     void display() const override;
 };
 
+class StarBlock : public Block {
+  public:
+    StarBlock(int lvl);
+    StarBlock(int lvl, const char letter);
+    ~StarBlock();
+    void init() override;
+    blockType getType() const { return type; }
+    void rotateClkwise() override;
+    void rotateCounterClkwise() override;
+    void shiftLeft(int px) override;
+    void shiftRight(int px) override;
+    void shiftUp(int px) override;
+    void shiftDown(int px) override;
+    void display() const override;
+};
+
 #endif
-
-
-// you need to have individual init for each block since they are displayed differently 
-// block has virtual init func that does nothing, specifics are implemented in its subclasses that override the init method
-
-// block has a vector of pointers to cells called blockCells 
-// this vector contains the coordinates the cells cover (cell contains itself's coordinate information inside cell class)
-
-// cell knows about the changes
-// grid cares about the changes (ex. to clear row(s))
-

@@ -19,13 +19,13 @@ void Block::rotateClkwise() {
   // do sth to newPos 
   // isvalidMove on the final pos 
   if (isValidMove(,I)){ 
-    
   }*/
   for (Cell* cell : blockCells) {
     int newRow = -cell->getCol();
     int newCol = cell->getRow();
     cell->setCoords(newRow, newCol);
   }
+  if (isHeavy) shiftDown(1);
   notifyObservers();
 }
 
@@ -35,6 +35,7 @@ void Block::rotateCounterClkwise() {
     int newCol = -cell->getRow();
     cell->setCoords(newRow, newCol);
   }
+  if (isHeavy) shiftDown(1);
   notifyObservers();
 }
 
@@ -77,19 +78,19 @@ void Block::shiftDown(int px) {
   notifyObservers();
 }
 
-bool block::isValidMove(vector<Cell *> updatedBlockCells, char charInput){ 
-   for (int i = 0; i < blockCells.size(); i++) {
-        blockCells[i]->setLetter(""); // assign old curblock empty letter
+bool Block::isValidMove(std::vector<Cell *> updatedBlockCells, char charInput) { 
+  for (int i = 0; i < blockCells.size(); i++) {
+    blockCells[i]->setLetter(' '); // assign old curblock empty letter
+  }
+  for (int i = 0; i < newBlockCells.size(); i++) {
+    if (newBlockCells[i]->isFilled()) { // if cell is not filled then assign it letter
+      for (int i = 0; i < blockCells.size(); i++) {
+        blockCells[i]->setLetter(charInput);
+      }
+      return false;
     }
-    for (int i = 0; i < newBlockCells.size(); i++) {
-        if (newBlockCells[i]->isFilled()) { // if cell is not filled then assign it letter
-            for (int i = 0; i < blockCells.size(); i++) {
-                blockCells[i]->setLetter(charInput); // 
-            }
-            return false;
-        }
-    }
-    return true; // newBlockCells does not overlap any existing blocks
+  }
+  return true; // newBlockCells does not overlap any existing blocks
 }
 
 void Block::display() const {
@@ -120,6 +121,7 @@ void IBlock::init() {
   blockCells.push_back(new Cell(1, 0));
   blockCells.push_back(new Cell(2, 0));
   blockCells.push_back(new Cell(3, 0));
+  for (Cell* cell : blockCells) cell->setLetter('I');
 }
 
 void IBlock::rotateClkwise() { 
@@ -163,6 +165,7 @@ void JBlock::init() {
   blockCells.push_back(new Cell(0, 1));
   blockCells.push_back(new Cell(1, 1));
   blockCells.push_back(new Cell(2, 1));
+  for (Cell* cell : blockCells) cell->setLetter('J');
 }
 
 void JBlock::rotateClkwise() {
@@ -205,6 +208,7 @@ void LBlock::init() {
   blockCells.push_back(new Cell(0, 1));
   blockCells.push_back(new Cell(1, 1));
   blockCells.push_back(new Cell(2, 1));
+  for (Cell* cell : blockCells) cell->setLetter('L');
 }
 
 void LBlock::rotateClkwise() {
@@ -247,14 +251,14 @@ void OBlock::init() {
   blockCells.push_back(new Cell(1, 0));
   blockCells.push_back(new Cell(0, 1));
   blockCells.push_back(new Cell(1, 1));
+  for (Cell* cell : blockCells) cell->setLetter('O');
 }
 
+// rotation on a OBlock effectively has no effect
 void OBlock::rotateClkwise() {
-  Block::rotateClkwise();
 }
 
 void OBlock::rotateCounterClkwise() {
-  Block::rotateCounterClkwise();
 }
 
 void OBlock::shiftLeft(int px) {
@@ -290,6 +294,7 @@ void SBlock::init() {
   blockCells.push_back(new Cell(1, 0));
   blockCells.push_back(new Cell(1, 1));
   blockCells.push_back(new Cell(2, 1));
+  for (Cell* cell : blockCells) cell->setLetter('S');
 }
 
 void SBlock::rotateClkwise() {
@@ -332,6 +337,7 @@ void ZBlock::init() {
   blockCells.push_back(new Cell(2, 0));
   blockCells.push_back(new Cell(0, 1));
   blockCells.push_back(new Cell(1, 1));
+  for (Cell* cell : blockCells) cell->setLetter('Z');
 }
 
 void ZBlock::rotateClkwise() {
@@ -375,6 +381,7 @@ void TBlock::init() {
   blockCells.push_back(new Cell(0, 1));
   blockCells.push_back(new Cell(1, 1));
   blockCells.push_back(new Cell(2, 1));
+  for (Cell* cell : blockCells) cell->setLetter('T');
 }
 
 void TBlock::rotateClkwise() {
@@ -405,4 +412,41 @@ void TBlock::display() const {
 
 }
 
-// star block '*' needed for level 4
+
+// StarBlock
+
+StarBlock::StarBlock(int lvl, const char letter) : Block(lvl, letter) {
+  init(); 
+}
+
+void StarBlock::init() {
+  blockCells.push_back(new Cell(0, 0));
+  for (Cell* cell : blockCells) cell->setLetter('*');
+}
+
+// rotation on a StarBlock effectively has no effect
+void StarBlock::rotateClkwise() {
+}
+
+void StarBlock::rotateCounterClkwise() {
+}
+
+void StarBlock::shiftLeft(int px) {
+  Block::shiftLeft(px);
+}
+
+void StarBlock::shiftRight(int px) {
+  Block::shiftRight(px);
+}
+
+void StarBlock::shiftUp(int px) {
+  Block::shiftUp(px);
+}
+
+void StarBlock::shiftDown(int px) {
+  Block::shiftDown(px);
+}
+
+void StarBlock::display() const {
+
+}
