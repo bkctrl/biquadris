@@ -1,7 +1,7 @@
 #include "block.h"
 
 // to-do : implement display() in each block
-Block::Block(int lvl, const char letter) : lvl(lvl), letter(letter) {}
+Block::Block(int level, const char letter) : lvl(lvl), letter(letter) {}
 
 // Block::blockType getType() { return type; } // return the type of block
 // block:: validity check 
