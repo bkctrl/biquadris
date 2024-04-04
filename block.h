@@ -3,6 +3,7 @@
 
 #include "cell.h"
 #include "observer.h"
+#include "subject.h"
 #include <vector>
 
 // add Heavy
@@ -10,7 +11,7 @@
 
 enum blockType {I,J,L,O,S,Z,T};
 
-class Block  : public Observer {
+class Block : public Observer, public Subject {
   protected:
     blockType type;
     bool isHeavy = false;
@@ -20,36 +21,37 @@ class Block  : public Observer {
     const char letter;
 
   public:
-    blockType getType() const { return type; } // return the type of block
-    // Block(blockType type) : type(type) {} // default parametric constructor
-    Block(int level);
-    Block(int level, const char letter);
+      blockType getType() const { return type; } // return the type of block
+      // Block(blockType type) : type(type) {} // default parametric constructor
+      Block(int level);
+      Block(int level, const char letter);
     virtual void init(); // intialize shape and position
-    virtual void rotateClkwise(); 
-    virtual void rotateCounterClkwise();
-    virtual void shiftLeft(int px); // shift left by n pixels
-    virtual void shiftRight(int px); // shift right by n pixels
-    virtual void shiftUp(int px); // shift up by n pixels
-    virtual void shiftDown(int px); // shift down by n pixels
-    virtual void display() const; // display block 
-    virtual ~Block();
-  // observer methods
-  void attach(Observer* observer) {
-    observers.emplace_back(observer);
-  }
-  void detach(Observer* observer) {
-    for (auto it = observers.begin(); it != observers.end(); ++it) {
-      if (*it == observer) {
-        observers.erase(it);
-        break;
-      }
-    }
-  }
-  void notify() {
-    for (Observer* observer : observers) {
-        observer->update();
-    }
-  }
+      virtual void rotateClkwise(); 
+      virtual void rotateCounterClkwise();
+      virtual void shiftLeft(int px); // shift left by n pixels
+      virtual void shiftRight(int px); // shift right by n pixels
+      virtual void shiftUp(int px); // shift up by n pixels
+      virtual void shiftDown(int px); // shift down by n pixels
+      virtual void display() const; // display block 
+      virtual ~Block();
+    // observer methods
+      void update(Subject &subject) override;
+  // void attach(Observer* observer) {
+  //   observers.emplace_back(observer);
+  // }
+  // void detach(Observer* observer) {
+  //   for (auto it = observers.begin(); it != observers.end(); ++it) {
+  //     if (*it == observer) {
+  //       observers.erase(it);
+  //       break;
+  //     }
+  //   }
+  // }
+  // void notify() {
+  //   for (Observer* observer : observers) {
+  //       observer->update();
+  //   }
+  // }
 };
 
 
