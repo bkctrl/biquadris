@@ -23,6 +23,7 @@ public:
     int getCol(); // returns x position of the cell
     int getRow(); // returns y position of the cell
     void incrementRow(); // increments the y position of the cell
+    void shiftCol(int factor); // increments the x position of the cell
     Grid* getGrid(); // returns the grid that the cell is in
 };
 

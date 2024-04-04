@@ -37,6 +37,10 @@ void Cell::incrementRow(){
     ++row;
 }
 
+void Cell::shiftCol(int factor){
+    col += factor;
+}
+
 Grid* Cell::getGrid(){
     return grid;
 }

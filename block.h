@@ -34,13 +34,13 @@ class Block : public Observer, public Subject {
     Cell** getOccupiedCells(); // return the cells that the block occupies
     void removeFromCell(Cell& cell); // remove the block from a cell
 
-    virtual void initializeCells() = 0; // initialize the cells of the block
+    virtual void init(char letter) = 0; // initialize the cells of the block
     virtual void rotateClockwise() = 0; // rotate the block clockwise
     virtual void rotateCounterClockwise() = 0; // rotate the block counterclockwise
 
-    void moveLeft(); // move the block left by one cell
-    void moveRight(); // move the block right by one cell
-    void moveDown(); // move the block down by one cell
+    void shiftLeft(); // move the block left by one cell
+    void shiftRight(); // move the block right by one cell
+    void shiftDown(); // move the block down by one cell
     void hardDrop(); // drop the block to the lowest possible position
     void centerDrop(); // drop the block to the center of the grid
 };

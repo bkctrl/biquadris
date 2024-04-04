@@ -21,31 +21,74 @@ bool Block::isCleared() const {}
 int Block::getLevel() const { return level; }
 
 bool Block::isValidPlacement(Cell& cell, int y, int x) const {
-
-
+  if (x < 0 || x > 11 || y < 0 || y > 15) {
+    return false;
+  }
+  // Check if the cell is occupied
+  return !cell.isOccupied();
 }
+
 Cell** Block::getOccupiedCells() {
-
-
+  return blockCells.empty() ? nullptr : &blockCells[0];
 }
+
 void Block::removeFromCell(Cell& cell) {
-
-  
+  cell.updateCell(false, this);
 }
 
+void Block::init(char letter) {
+  switch (letter) {
+    case 'I':
+      blockCells.push_back(new Cell(0, 0, &grid)); 
+      blockCells.push_back(new Cell(1, 0, &grid));
+      blockCells.push_back(new Cell(2, 0, &grid));
+      blockCells.push_back(new Cell(3, 0, &grid));
+      break;
+    case 'J':
+      blockCells.push_back(new Cell(0, 0, &grid));
+      blockCells.push_back(new Cell(0, 1, &grid));
+      blockCells.push_back(new Cell(1, 1, &grid));
+      blockCells.push_back(new Cell(2, 1, &grid));
+      break;
+    case 'L':
+      blockCells.push_back(new Cell(2, 0, &grid)); 
+      blockCells.push_back(new Cell(0, 1, &grid));
+      blockCells.push_back(new Cell(1, 1, &grid));
+      blockCells.push_back(new Cell(2, 1, &grid));
+      break;
+    case 'O':
+      blockCells.push_back(new Cell(0, 0, &grid));
+      blockCells.push_back(new Cell(1, 0, &grid));
+      blockCells.push_back(new Cell(0, 1, &grid));
+      blockCells.push_back(new Cell(1, 1, &grid));
+      break;
+    case 'S':
+      blockCells.push_back(new Cell(0, 0, &grid));
+      blockCells.push_back(new Cell(1, 0, &grid));
+      blockCells.push_back(new Cell(1, 1, &grid));
+      blockCells.push_back(new Cell(2, 1, &grid));
+      break;
+    case 'Z':
+      blockCells.push_back(new Cell(1, 0, &grid));
+      blockCells.push_back(new Cell(2, 0, &grid));
+      blockCells.push_back(new Cell(0, 1, &grid));
+      blockCells.push_back(new Cell(1, 1, &grid));
+      break;
+    case 'T':
+      blockCells.push_back(new Cell(1, 0, &grid));
+      blockCells.push_back(new Cell(0, 1, &grid));
+      blockCells.push_back(new Cell(1, 1, &grid));
+      blockCells.push_back(new Cell(2, 1, &grid));
+      break;
+    default:
+      // Handle invalid letter here
+      break;
+  }
+}
 
+// ---------------------------------- ROTATIONS ----------------------------------
 
-
-
-
-
-
-
-
-
-
-
-void Block::rotateClkwise() {
+void Block::rotateClockwise() {
   /*std::vector <Cell *> newPos;
   // do sth to newPos 
   // isvalidMove on the final pos 
@@ -60,7 +103,7 @@ void Block::rotateClkwise() {
   // notifyObservers();
 }
 
-void Block::rotateCounterClkwise() {
+void Block::rotateCounterClockwise() {
   // for (Cell* cell : blockCells) {
   //   int newRow = cell->getCol();
   //   int newCol = -cell->getRow();
@@ -70,40 +113,51 @@ void Block::rotateCounterClkwise() {
   // notifyObservers();
 }
 
-// to-do : check if can't be shifted further
-void Block::shiftLeft(int px) {
+// ---------------------------------- ROTATIONS ----------------------------------
+
+void Block::shiftLeft() {
   // have a check for validity of move
+  bool isValid = true;
   for (Cell* cell : blockCells) {
-    int newColumn = cell->getCol() - px;
-    // edge case: when getcol() is 0 would cause UB
-    cell->setCoords(cell->getRow(), newColumn);
+    int newCol = cell->getCol() - 1;
+    int newRow = cell->getRow();
+    if (isHeavy) newCol -= 1;
+    if (!isValidPlacement(*cell, newRow, newCol)) {
+      isValid = false;
+    }
+    if (isValid) {
+      for (Cell* cell : blockCells) {
+        cell->shiftCol(-1);
+      }
+    }
   }
-  
   notifyObservers();
 }
 
-// to-do : check if can't be shifted further
-void Block::shiftRight(int px) {
+
+
+
+
+
+void Block::shiftRight() {
   for (Cell* cell : blockCells) {
-    int newColumn = cell->getCol() + px;
+    int newColumn = cell->getCol();
     cell->setCoords(cell->getRow(), newColumn);
   }
   notifyObservers();
 }
 
-// to-do : check if can't be shifted further
-void Block::shiftUp(int px) {
+void Block::shiftUp() {
   for (Cell* cell : blockCells) {
-    int newCol = cell->getCol() + px;
+    int newCol = cell->getCol();
     cell->setCoords(cell->getRow(), newCol);
   }
   notifyObservers();
 }
 
-// to-do : check if can't be shifted further
-void Block::shiftDown(int px) {
+void Block::shiftDown() {
   for (Cell* cell : blockCells) {
-    int newCol = cell->getCol() - px;
+    int newCol = cell->getCol();
     cell->setCoords(cell->getRow(), newCol);
   }
   notifyObservers();
@@ -140,55 +194,7 @@ void Block::update(Subject &subject) {
   // If there are other Subjects that Cell observes, handle them with additional checks and logic.
 }
 
-void Block::init(char letter) {
-  switch (letter) {
-    case 'I':
-      blockCells.push_back(new Cell(0, 0)); 
-      blockCells.push_back(new Cell(1, 0));
-      blockCells.push_back(new Cell(2, 0));
-      blockCells.push_back(new Cell(3, 0));
-      break;
-    case 'J':
-      blockCells.push_back(new Cell(0, 0));
-      blockCells.push_back(new Cell(0, 1));
-      blockCells.push_back(new Cell(1, 1));
-      blockCells.push_back(new Cell(2, 1));
-      break;
-    case 'L':
-      blockCells.push_back(new Cell(2, 0)); 
-      blockCells.push_back(new Cell(0, 1));
-      blockCells.push_back(new Cell(1, 1));
-      blockCells.push_back(new Cell(2, 1));
-      break;
-    case 'O':
-      blockCells.push_back(new Cell(0, 0));
-      blockCells.push_back(new Cell(1, 0));
-      blockCells.push_back(new Cell(0, 1));
-      blockCells.push_back(new Cell(1, 1));
-      break;
-    case 'S':
-      blockCells.push_back(new Cell(0, 0));
-      blockCells.push_back(new Cell(1, 0));
-      blockCells.push_back(new Cell(1, 1));
-      blockCells.push_back(new Cell(2, 1));
-      break;
-    case 'Z':
-      blockCells.push_back(new Cell(1, 0));
-      blockCells.push_back(new Cell(2, 0));
-      blockCells.push_back(new Cell(0, 1));
-      blockCells.push_back(new Cell(1, 1));
-      break;
-    case 'T':
-      blockCells.push_back(new Cell(1, 0));
-      blockCells.push_back(new Cell(0, 1));
-      blockCells.push_back(new Cell(1, 1));
-      blockCells.push_back(new Cell(2, 1));
-      break;
-    default:
-      // Handle invalid letter here
-      break;
-  }
-}
+
 
 void IBlock::rotateClkwise() { 
     Block::rotateClkwise();
@@ -199,20 +205,20 @@ void IBlock::rotateCounterClkwise() {
   Block::rotateCounterClkwise();
 }
 
-void IBlock::shiftLeft(int px) {
-  Block::shiftLeft(px);
+void IBlock::shiftLeft() {
+  Block::shiftLe);
 }
 
-void IBlock::shiftRight(int px) {
-  Block::shiftRight(px);
+void IBlock::shiftRight() {
+  Block::shiftRig);
 }
 
-void IBlock::shiftUp(int px) {
-  Block::shiftUp(px);
+void IBlock::shiftUp() {
+  Block::shift);
 }
 
-void IBlock::shiftDown(int px) {
-  Block::shiftDown(px);
+void IBlock::shiftDown() {
+  Block::shiftDo);
 }
 
 void IBlock::display() const {
@@ -228,20 +234,20 @@ void JBlock::rotateCounterClkwise() {
   Block::rotateCounterClkwise();
 }
 
-void JBlock::shiftLeft(int px) {
-  Block::shiftLeft(px);
+void JBlock::shiftLeft() {
+  Block::shiftLe);
 }
 
-void JBlock::shiftRight(int px) {
-  Block::shiftRight(px);
+void JBlock::shiftRight() {
+  Block::shiftRig);
 }
 
-void JBlock::shiftUp(int px) {
-  Block::shiftUp(px);
+void JBlock::shiftUp() {
+  Block::shift);
 }
 
-void JBlock::shiftDown(int px) {
-  Block::shiftDown(px);
+void JBlock::shiftDown() {
+  Block::shiftDo);
 }
 
 void JBlock::display() const {
@@ -257,20 +263,20 @@ void LBlock::rotateCounterClkwise() {
   Block::rotateCounterClkwise();
 }
 
-void LBlock::shiftLeft(int px) {
-  Block::shiftLeft(px);
+void LBlock::shiftLeft() {
+  Block::shiftLe);
 }
 
-void LBlock::shiftRight(int px) {
-  Block::shiftRight(px);
+void LBlock::shiftRight() {
+  Block::shiftRig);
 }
 
-void LBlock::shiftUp(int px) {
-  Block::shiftUp(px);
+void LBlock::shiftUp() {
+  Block::shift);
 }
 
-void LBlock::shiftDown(int px) {
-  Block::shiftDown(px);
+void LBlock::shiftDown() {
+  Block::shiftDo);
 }
 
 void LBlock::display() const {
@@ -286,20 +292,20 @@ void OBlock::rotateClkwise() {
 void OBlock::rotateCounterClkwise() {
 }
 
-void OBlock::shiftLeft(int px) {
-  Block::shiftLeft(px);
+void OBlock::shiftLeft() {
+  Block::shiftLe);
 }
 
-void OBlock::shiftRight(int px) {
-  Block::shiftRight(px);
+void OBlock::shiftRight() {
+  Block::shiftRig);
 }
 
-void OBlock::shiftUp(int px) {
-  Block::shiftUp(px);
+void OBlock::shiftUp() {
+  Block::shift);
 }
 
-void OBlock::shiftDown(int px) {
-  Block::shiftDown(px);
+void OBlock::shiftDown() {
+  Block::shiftDo);
 }
 
 void OBlock::display() const {
@@ -316,20 +322,20 @@ void SBlock::rotateCounterClkwise() {
   Block::rotateCounterClkwise();
 }
 
-void SBlock::shiftLeft(int px) {
-  Block::shiftLeft(px);
+void SBlock::shiftLeft() {
+  Block::shiftLe);
 }
 
-void SBlock::shiftRight(int px) {
-  Block::shiftRight(px);
+void SBlock::shiftRight() {
+  Block::shiftRig);
 }
 
-void SBlock::shiftUp(int px) {
-  Block::shiftUp(px);
+void SBlock::shiftUp() {
+  Block::shift);
 }
 
-void SBlock::shiftDown(int px) {
-  Block::shiftDown(px);
+void SBlock::shiftDown() {
+  Block::shiftDo);
 }
 
 void SBlock::display() const {
@@ -346,20 +352,20 @@ void ZBlock::rotateCounterClkwise() {
   Block::rotateCounterClkwise();
 }
 
-void ZBlock::shiftLeft(int px) {
-  Block::shiftLeft(px);
+void ZBlock::shiftLeft() {
+  Block::shiftLe);
 }
 
-void ZBlock::shiftRight(int px) {
-  Block::shiftRight(px);
+void ZBlock::shiftRight() {
+  Block::shiftRig);
 }
 
-void ZBlock::shiftUp(int px) {
-  Block::shiftUp(px);
+void ZBlock::shiftUp() {
+  Block::shift);
 }
 
-void ZBlock::shiftDown(int px) {
-  Block::shiftDown(px);
+void ZBlock::shiftDown() {
+  Block::shiftDo);
 }
 
 void ZBlock::display() const {
@@ -376,20 +382,20 @@ void TBlock::rotateCounterClkwise() {
   Block::rotateCounterClkwise();
 }
 
-void TBlock::shiftLeft(int px) {
-  Block::shiftLeft(px);
+void TBlock::shiftLeft() {
+  Block::shiftLe);
 }
 
-void TBlock::shiftRight(int px) {
-  Block::shiftRight(px);
+void TBlock::shiftRight() {
+  Block::shiftRig);
 }
 
-void TBlock::shiftUp(int px) {
-  Block::shiftUp(px);
+void TBlock::shiftUp() {
+  Block::shift);
 }
 
-void TBlock::shiftDown(int px) {
-  Block::shiftDown(px);
+void TBlock::shiftDown() {
+  Block::shiftDo);
 }
 
 void TBlock::display() const {
@@ -415,20 +421,20 @@ void StarBlock::rotateClkwise() {
 void StarBlock::rotateCounterClkwise() {
 }
 
-void StarBlock::shiftLeft(int px) {
-  Block::shiftLeft(px);
+void StarBlock::shiftLeft() {
+  Block::shiftLe);
 }
 
-void StarBlock::shiftRight(int px) {
-  Block::shiftRight(px);
+void StarBlock::shiftRight() {
+  Block::shiftRig);
 }
 
-void StarBlock::shiftUp(int px) {
-  Block::shiftUp(px);
+void StarBlock::shiftUp() {
+  Block::shift);
 }
 
-void StarBlock::shiftDown(int px) {
-  Block::shiftDown(px);
+void StarBlock::shiftDown() {
+  Block::shiftDo);
 }
 
 void StarBlock::display() const {
