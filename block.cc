@@ -1,7 +1,9 @@
 #include "block.h"
 
 // to-do : implement display() in each block
-Block::Block(int level, const char letter) : lvl(lvl), letter(letter) {}
+Block::Block(int level, char letter) : level(level), letter(letter) {
+  init(letter);
+}
 
 // Block::blockType getType() { return type; } // return the type of block
 // block:: validity check 
@@ -78,16 +80,17 @@ void Block::shiftDown(int px) {
   notifyObservers();
 }
 
-bool Block::isValidMove(std::vector<Cell *> updatedBlockCells, char charInput) { 
-  for (int i = 0; i < blockCells.size(); i++) {
-    blockCells[i]->setLetter(' '); // assign old curblock empty letter
-  }
-  for (int i = 0; i < newBlockCells.size(); i++) {
-    if (newBlockCells[i]->isFilled()) { // if cell is not filled then assign it letter
-      for (int i = 0; i < blockCells.size(); i++) {
-        blockCells[i]->setLetter(charInput);
-      }
-      return false;
+bool Block::isValidMove(std::vector<Cell *> newBlockCells, char charInput){ 
+   for (int i = 0; i < blockCells.size(); i++) {
+        blockCells[i]->setLetter(' '); // assign old curblock empty letter
+    }
+    for (int i = 0; i < newBlockCells.size(); i++) {
+        if (newBlockCells[i]->isFilled()) { // if cell is not filled then assign it letter
+            for (int i = 0; i < blockCells.size(); i++) {
+                blockCells[i]->setLetter(charInput); // 
+            }
+            return false;
+        }
     }
   }
   return true; // newBlockCells does not overlap any existing blocks
@@ -104,24 +107,58 @@ void Block::update(Subject &subject) {
   // If this is not the case, this method will need to be adapted accordingly.
   
   // We should safely check if whoNotified is a Cell
-  Block* changedCell = dynamic_cast<Block*>(&subject);
+  // Block* changedBlock = dynamic_cast<Block*>(&subject);
   // If there are other Subjects that Cell observes, handle them with additional checks and logic.
 }
 
-
-
-// IBlock
-
-IBlock::IBlock(int lvl, const char letter) : Block(lvl, letter) {
-  init();
-}
-
-void IBlock::init() {
-  blockCells.push_back(new Cell(0, 0)); 
-  blockCells.push_back(new Cell(1, 0));
-  blockCells.push_back(new Cell(2, 0));
-  blockCells.push_back(new Cell(3, 0));
-  for (Cell* cell : blockCells) cell->setLetter('I');
+void Block::init(char letter) {
+  switch (letter) {
+    case 'I':
+      blockCells.push_back(new Cell(0, 0)); 
+      blockCells.push_back(new Cell(1, 0));
+      blockCells.push_back(new Cell(2, 0));
+      blockCells.push_back(new Cell(3, 0));
+      break;
+    case 'J':
+      blockCells.push_back(new Cell(0, 0));
+      blockCells.push_back(new Cell(0, 1));
+      blockCells.push_back(new Cell(1, 1));
+      blockCells.push_back(new Cell(2, 1));
+      break;
+    case 'L':
+      blockCells.push_back(new Cell(2, 0)); 
+      blockCells.push_back(new Cell(0, 1));
+      blockCells.push_back(new Cell(1, 1));
+      blockCells.push_back(new Cell(2, 1));
+      break;
+    case 'O':
+      blockCells.push_back(new Cell(0, 0));
+      blockCells.push_back(new Cell(1, 0));
+      blockCells.push_back(new Cell(0, 1));
+      blockCells.push_back(new Cell(1, 1));
+      break;
+    case 'S':
+      blockCells.push_back(new Cell(0, 0));
+      blockCells.push_back(new Cell(1, 0));
+      blockCells.push_back(new Cell(1, 1));
+      blockCells.push_back(new Cell(2, 1));
+      break;
+    case 'Z':
+      blockCells.push_back(new Cell(1, 0));
+      blockCells.push_back(new Cell(2, 0));
+      blockCells.push_back(new Cell(0, 1));
+      blockCells.push_back(new Cell(1, 1));
+      break;
+    case 'T':
+      blockCells.push_back(new Cell(1, 0));
+      blockCells.push_back(new Cell(0, 1));
+      blockCells.push_back(new Cell(1, 1));
+      blockCells.push_back(new Cell(2, 1));
+      break;
+    default:
+      // Handle invalid letter here
+      break;
+  }
 }
 
 void IBlock::rotateClkwise() { 
@@ -154,20 +191,6 @@ void IBlock::display() const {
 }
 
 
-// JBlock
-
-JBlock::JBlock(int lvl, const char letter) : Block(lvl, letter) {
-  init(); 
-}
-
-void JBlock::init() {
-  blockCells.push_back(new Cell(0, 0));
-  blockCells.push_back(new Cell(0, 1));
-  blockCells.push_back(new Cell(1, 1));
-  blockCells.push_back(new Cell(2, 1));
-  for (Cell* cell : blockCells) cell->setLetter('J');
-}
-
 void JBlock::rotateClkwise() {
   Block::rotateClkwise();
 }
@@ -196,20 +219,6 @@ void JBlock::display() const {
 
 }
 
-
-// LBlock
-
-LBlock::LBlock(int lvl, const char letter) : Block(lvl, letter) {
-  init(); 
-}
-
-void LBlock::init() {
-  blockCells.push_back(new Cell(2, 0)); 
-  blockCells.push_back(new Cell(0, 1));
-  blockCells.push_back(new Cell(1, 1));
-  blockCells.push_back(new Cell(2, 1));
-  for (Cell* cell : blockCells) cell->setLetter('L');
-}
 
 void LBlock::rotateClkwise() {
   Block::rotateClkwise();
@@ -240,19 +249,6 @@ void LBlock::display() const {
 }
 
 
-// OBlock
-
-OBlock::OBlock(int lvl, const char letter) : Block(lvl, letter) {
-  init(); 
-}
-
-void OBlock::init() {
-  blockCells.push_back(new Cell(0, 0));
-  blockCells.push_back(new Cell(1, 0));
-  blockCells.push_back(new Cell(0, 1));
-  blockCells.push_back(new Cell(1, 1));
-  for (Cell* cell : blockCells) cell->setLetter('O');
-}
 
 // rotation on a OBlock effectively has no effect
 void OBlock::rotateClkwise() {
@@ -283,20 +279,6 @@ void OBlock::display() const {
 
 
 
-// SBlock
-
-SBlock::SBlock(int lvl, const char letter) : Block(lvl, letter) {
-  init(); 
-}
-
-void SBlock::init() {
-  blockCells.push_back(new Cell(0, 0));
-  blockCells.push_back(new Cell(1, 0));
-  blockCells.push_back(new Cell(1, 1));
-  blockCells.push_back(new Cell(2, 1));
-  for (Cell* cell : blockCells) cell->setLetter('S');
-}
-
 void SBlock::rotateClkwise() {
   Block::rotateClkwise();
 }
@@ -326,19 +308,6 @@ void SBlock::display() const {
 }
 
 
-// ZBlock
-
-ZBlock::ZBlock(int lvl, const char letter) : Block(lvl, letter) {
-  init(); 
-}
-
-void ZBlock::init() {
-  blockCells.push_back(new Cell(1, 0));
-  blockCells.push_back(new Cell(2, 0));
-  blockCells.push_back(new Cell(0, 1));
-  blockCells.push_back(new Cell(1, 1));
-  for (Cell* cell : blockCells) cell->setLetter('Z');
-}
 
 void ZBlock::rotateClkwise() {
   Block::rotateClkwise();
@@ -369,20 +338,6 @@ void ZBlock::display() const {
 }
 
 
-
-// TBlock
-
-TBlock::TBlock(int lvl, const char letter) : Block(lvl, letter) {
-  init(); 
-}
-
-void TBlock::init() {
-  blockCells.push_back(new Cell(1, 0));
-  blockCells.push_back(new Cell(0, 1));
-  blockCells.push_back(new Cell(1, 1));
-  blockCells.push_back(new Cell(2, 1));
-  for (Cell* cell : blockCells) cell->setLetter('T');
-}
 
 void TBlock::rotateClkwise() {
   Block::rotateClkwise();

@@ -11,7 +11,7 @@ class Block;
 class Level {
     //int levelNum; // maybe not needed not too sure
     protected:
-    int readsFile;
+    bool readsFile;
     int seed;
     int index;
     int blockCounter; // for level 4
@@ -22,15 +22,15 @@ class Level {
     
     public: 
     // maybe default ctor not needed: Level(int levelNum, const std::string& FileName);
-    Block * createBlock (int, char); // creates block based on the specifc type and input it to the corresponding level
+    Block* createBlock (int, char); // creates block based on the specifc type and input it to the corresponding level
     void setSeed(int);
 
     // int getLevelnum() const; 
     // virtual void setSource(std::istream *in) = 0;
-    virtual bool splitBlock(int blockCounter); // drops the star block
+    // virtual bool splitBlock(int blockCounter); // drops the star block
     void norandom(std::string);
     void random();
-    virtual Block * getBlock() = 0;
+    virtual Block* getBlock() = 0;
     virtual ~Level();
     
 };

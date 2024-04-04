@@ -8,10 +8,10 @@
 
 class TextDisplay : public Observer, public Subject {
     std::vector< std::vector<char> > theDisplay;
-    const int width;
-    const int height;
+    const int width = 11;
+    const int height = 18;
 public:
-    TextDisplay(int width, int height); //MIL
+    TextDisplay(); //MIL
     // some sort of update function to update the texts 
     //friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
     // various functions that display the component

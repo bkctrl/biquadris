@@ -1,29 +1,29 @@
 #ifndef CELL_H
 #define CELL_H
 
-#include <vector>
-#include "observer.h"
+#include <string>
 #include "subject.h"
 
-class Cell : public Observer , public Subject {
-    char letter = ' ';
-    std::vector<Observer*> observers; 
-    int r, c; // Row and column
-    bool filled; // Stores true if cell is filled
+class Block;
+class Grid;
+
+class Cell : public Subject {
+    bool occupied; // true if cell is occupied
+    Block* currentBlock; // block that is occupying the cell
+    int posX; // x position of the cell
+    int posY; // y position of the cell
+    Grid* parentGrid; // pointer to the grid that the cell is in
 
 public:
-    Cell(int r = 0, int c = 0); // parametric ctor (ADDED WITH BLOCK BRANCH)
-    void setLetter(char c); // set letter to c
-    char getLetter() const; 
-    int getRow() const; // Returns the row number
-    int getCol() const; // Returns the column number
-    bool isFilled() const; // check if this particualr cell is full
-    // void notifyObservers(); // Notify observers of changes to this cell
-    void setCoords(int r, int c); // Sets the cell's coordinates
-    ~Cell() override;
-    
-    // Observer interface
-    void update(Subject &subject) override;
+    Cell(int x, int y, Grid* grid); // constructor
+    void updateCell(bool isNowOccupied, Block* newBlock); // updates the cell with new block
+    void swapCell(Cell& other); // swaps the cell with another cell
+    bool isOccupied(); // returns true if cell is occupied
+    Block* getOccupyingBlock(); // returns the block that is occupying the cell
+    int getX(); // returns x position of the cell
+    int getY(); // returns y position of the cell
+    void incrementY(); // increments the y position of the cell
+    Grid* getParentGrid(); // returns the grid that the cell is in
 };
 
 #endif // CELL_H
