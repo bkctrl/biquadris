@@ -1,49 +1,41 @@
 #include "cell.h"
+#include <string>
 
-Cell::Cell(int row, int col) : letter(' '), r(row), c(col), filled(false) {}
+Cell::Cell(int x, int y, Grid *grid): posX{x}, posY{y}, occupied{false}, currentBlock{nullptr}, parentGrid{grid} {}
 
-#include <algorithm> // Add missing include statement for the algorithm library
-
-Cell::~Cell() {}
-
-void Cell::setLetter(char c) {
-    letter = c;
-    filled = (c != ' ');
-    notifyObservers();
+bool Cell::isOccupied() {
+    return occupied;
 }
 
-char Cell::getLetter() const {
-  return letter;
+void Cell::updateCell(bool newoccupied, Block *newCurrentBlock){
+    occupied = newoccupied;
+    currentBlock = newCurrentBlock;
+    this->notifyObservers();
 }
 
-int Cell::getCol() const {
-    return c;
+void Cell::swapCell(Cell &other) {
+    std::swap(occupied, other.occupied);
+    std::swap(currentBlock, other.currentBlock);
+    this->notifyObservers();
+    other.notifyObservers();
 }
 
-bool Cell::isFilled() const {
-    return filled;
+int Cell::getX() {
+    return posX;
 }
 
-void Cell::setCoords(int row, int col) {
-    r = row;
-    c = col;
-    notifyObservers(); // Notify observers of the coordinate change
+int Cell::getY() {
+    return posY;
 }
 
-// This `update` method is called when the Cell as an Observer
-// is notified by the Subjects it is observing.
-void Cell::update(Subject &subject) {
-    // Assuming that Cell observes other Cells, it will update its state based on changes in those Cells.
-    // If this is not the case, this method will need to be adapted accordingly.
-    
-    // We should safely check if whoNotified is a Cell
-    Cell* changedCell = dynamic_cast<Cell*>(&subject);
-    if (changedCell) {
-        // Now you can safely use changedCell to access Cell-specific methods and members.
-        // For example, if we want to mirror the state (represented by letter) of the changed cell:
-        if (changedCell->isFilled() && !this->isFilled()) {
-            this->setLetter(changedCell->getLetter());
-        }
-    }
-    // If there are other Subjects that Cell observes, handle them with additional checks and logic.
+Block* Cell::getOccupyingBlock(){
+    return currentBlock;
+}
+
+void Cell::incrementY(){
+    ++posY;
+}
+
+Grid* Cell::getParentGrid(){
+    return parentGrid;
 }

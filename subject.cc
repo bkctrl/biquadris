@@ -1,4 +1,6 @@
-#include "Subject.h"
+#include "subject.h"
+
+Subject::~Subject() {}
 
 void Subject::attach(Observer* obs) {
     observers.push_back(obs);
