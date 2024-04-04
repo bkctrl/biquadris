@@ -23,9 +23,9 @@ class Block : public Observer, public Subject {
   public:
       blockType getType() const { return type; } // return the type of block
       // Block(blockType type) : type(type) {} // default parametric constructor
-      Block(int level);
-      Block(int level, const char letter);
-    virtual void init(); // intialize shape and position
+      Block(int lvl);
+      Block(int lvl, const char letter);
+      virtual void init(); // intialize shape and position
       virtual void rotateClkwise(); 
       virtual void rotateCounterClkwise();
       virtual void shiftLeft(int px); // shift left by n pixels
@@ -74,6 +74,7 @@ class IBlock : public Block {
 class JBlock : public Block {
   public:
     JBlock(int lvl);
+    JBlock(int lvl, const char letter);
     ~JBlock();
     void init();
     blockType getType() const { return type; }
@@ -89,6 +90,7 @@ class JBlock : public Block {
 class LBlock : public Block {
   public:
     LBlock(int lvl);
+    LBlock(int lvl, const char letter);
     ~LBlock();
     void init() override;
     blockType getType() const { return type; }
@@ -104,6 +106,7 @@ class LBlock : public Block {
 class OBlock : public Block {
   public:
     OBlock(int lvl);
+    OBlock(int lvl, const char letter);
     ~OBlock();
     void init() override;
     blockType getType() const { return type; }
@@ -119,6 +122,7 @@ class OBlock : public Block {
 class SBlock : public Block {
   public:
     SBlock(int lvl);
+    SBlock(int lvl, const char letter);
     ~SBlock();
     void init() override;
     blockType getType() const { return type; }
@@ -134,6 +138,7 @@ class SBlock : public Block {
 class ZBlock : public Block {
   public:
     ZBlock(int lvl);
+    ZBlock(int lvl, const char letter);
     ~ZBlock();
     void init() override;
     blockType getType() const { return type; }
@@ -149,6 +154,7 @@ class ZBlock : public Block {
 class TBlock : public Block {
   public:
     TBlock(int lvl);
+    TBlock(int lvl, const char letter);
     ~TBlock();
     void init() override;
     blockType getType() const { return type; }

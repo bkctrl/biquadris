@@ -3,7 +3,7 @@
 // grid needs an overloaded<< operator to display the board (aka grid)
 
 // code doesnt work: rough idea only
-Grid::Grid(int height, int width) : height(height), width(width) {
+Grid::Grid() : height(18), width(11) {
     init(); // ideally no need for this, is there a start command?
 }
 
@@ -23,4 +23,3 @@ std::ostream& operator<<(std::ostream& out, const Grid& grid) {
     out << *grid.td;
     return out;
 }
-
