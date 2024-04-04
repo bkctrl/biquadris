@@ -15,6 +15,12 @@ Block::~Block() {
 }
 
 void Block::rotateClkwise() {
+  /*std::vector <Cell *> newPos;
+  // do sth to newPos 
+  // isvalidMove on the final pos 
+  if (isValidMove(,I)){ 
+    
+  }*/
   for (Cell* cell : blockCells) {
     int newRow = -cell->getCol();
     int newCol = cell->getRow();
@@ -36,17 +42,19 @@ void Block::rotateCounterClkwise() {
 void Block::shiftLeft(int px) {
   // have a check for validity of move
   for (Cell* cell : blockCells) {
-    int newRow = cell->getRow() - px;
-    cell->setCoords(newRow, cell->getCol());
+    int newColumn = cell->getCol() - px;
+    // edge case: when getcol() is 0 would cause UB
+    cell->setCoords(cell->getRow(), newColumn);
   }
+  
   notifyObservers();
 }
 
 // to-do : check if can't be shifted further
 void Block::shiftRight(int px) {
   for (Cell* cell : blockCells) {
-    int newRow = cell->getRow() + px;
-    cell->setCoords(newRow, cell->getCol());
+    int newColumn = cell->getCol() + px;
+    cell->setCoords(cell->getRow(), newColumn);
   }
   notifyObservers();
 }
@@ -69,7 +77,7 @@ void Block::shiftDown(int px) {
   notifyObservers();
 }
 
-bool block::isValidMove(vector<Cell *> updatedBlockCells, char charInput){
+bool block::isValidMove(vector<Cell *> updatedBlockCells, char charInput){ 
    for (int i = 0; i < blockCells.size(); i++) {
         blockCells[i]->setLetter(""); // assign old curblock empty letter
     }
@@ -114,8 +122,9 @@ void IBlock::init() {
   blockCells.push_back(new Cell(3, 0));
 }
 
-void IBlock::rotateClkwise() {
-  Block::rotateClkwise();
+void IBlock::rotateClkwise() { 
+    Block::rotateClkwise();
+  
 }
 
 void IBlock::rotateCounterClkwise() {
@@ -145,7 +154,7 @@ void IBlock::display() const {
 
 // JBlock
 
-JBlock::JBlock(int lvl) : Block(lvl) {
+JBlock::JBlock(int lvl, const char letter) : Block(lvl, letter) {
   init(); 
 }
 
@@ -187,7 +196,7 @@ void JBlock::display() const {
 
 // LBlock
 
-LBlock::LBlock(int lvl) : Block(lvl) {
+LBlock::LBlock(int lvl, const char letter) : Block(lvl, letter) {
   init(); 
 }
 
@@ -229,7 +238,7 @@ void LBlock::display() const {
 
 // OBlock
 
-OBlock::OBlock(int lvl) : Block(lvl) {
+OBlock::OBlock(int lvl, const char letter) : Block(lvl, letter) {
   init(); 
 }
 
@@ -272,7 +281,7 @@ void OBlock::display() const {
 
 // SBlock
 
-SBlock::SBlock(int lvl) : Block(lvl) {
+SBlock::SBlock(int lvl, const char letter) : Block(lvl, letter) {
   init(); 
 }
 
@@ -314,7 +323,7 @@ void SBlock::display() const {
 
 // ZBlock
 
-ZBlock::ZBlock(int lvl) : Block(lvl) {
+ZBlock::ZBlock(int lvl, const char letter) : Block(lvl, letter) {
   init(); 
 }
 
@@ -357,7 +366,7 @@ void ZBlock::display() const {
 
 // TBlock
 
-TBlock::TBlock(int lvl) : Block(lvl) {
+TBlock::TBlock(int lvl, const char letter) : Block(lvl, letter) {
   init(); 
 }
 
