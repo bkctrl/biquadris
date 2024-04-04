@@ -7,24 +7,23 @@
 level4::level4(): readsFile{false} {}
 
 char level4::randomChar() {
-    int r = rand() % 9;
-    if (r < 1) {
-        return 'I';
-    } else if (r < 2) {
-        return 'J';
-    } else if (r < 3) {
-        return 'L';
-    } else if (r < 4) {
-        return 'O';
-    } else if (r < 6) {
-        return 'S';
-    } else if (r < 7) {
+    int c = rand() % 9;
+    if (c == 0) {
         return 'T';
-    } else { // modulo is 8
+    } else if (c == 1) {
+        return 'O';
+    } else if (c == 2) {
+        return 'L';
+    } else if (c == 3) {
+        return 'J';
+    } else if (c == 4 || c == 5) {
+        return 'S';
+    } else if (c == 6) {
+        return 'I';
+    } else {  // c == 7 OR c == 8
         return 'Z';
     }
 }
-
 
 Block * level4::getBlock() {
     char nextBlockChar;

@@ -5,20 +5,20 @@
 level3::level3(): readsFile{false} {}
 
 char level3::randomChar() {
-    int r = rand() % 9;
-    if (r < 1) {
+    int c = rand() % 9;
+    if (c == 0) {
         return 'T';
-    } else if (r < 2) {
+    } else if (c == 1) {
         return 'O';
-    } else if (r < 3) {
+    } else if (c == 2) {
         return 'L';
-    } else if (r < 4) {
+    } else if (c == 3) {
         return 'J';
-    } else if (r < 6) {
+    } else if (c == 4 || c == 5) {
         return 'S';
-    } else if (r < 7) {
+    } else if (c == 6) {
         return 'I';
-    } else {  
+    } else {  // c == 7 OR c == 8
         return 'Z';
     }
 }

@@ -40,12 +40,12 @@ if (playerOne->getLevel() >= 3){
   playerOne->getCurBlock()->down();
   }
 */
-
+// 
  /*if (cmd == "left") {
                 if (playerOneTurn){
                     playerOne->getCurBlock()->left();
                     if (playerOne->getLevel() >= 3){
-                        playerOne->getCurBlock()->down();
+                        playerOne->getCurBlock()->down(); // this does the purpose of heavy 
                     } */
 
 // special actions:

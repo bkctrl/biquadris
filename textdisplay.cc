@@ -24,12 +24,15 @@ void TextDisplay::displayboard() {
   }
 }
 
+
 std::ostream &operator<<(std::ostream &out, const TextDisplay &td) {
+  out << "-----------" << std::endl;
   for (const auto &row : td.theDisplay) { // for every row
     for (char cell : row) { // for every cell in each row
       out << cell;
     }
     out << std::endl;
   }
+  out << "-----------" << std::endl;
   return out;
 }
