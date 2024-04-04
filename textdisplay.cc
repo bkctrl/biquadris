@@ -8,6 +8,7 @@ TextDisplay::TextDisplay(int width, int height) : width(width), height(height) {
 
 TextDisplay::~TextDisplay() {}
 
+// updates the display with the changed cell state upon notification from said cell
 void TextDisplay::notify(Cell &c) {
   int row = c.getRow();
   int col = c.getCol();

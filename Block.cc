@@ -18,7 +18,7 @@ void Block::rotateClkwise() {
     int newCol = cell->getRow();
     cell->setCoords(newRow, newCol);
   }
-  notify();
+  notifyObservers();
 }
 
 void Block::rotateCounterClkwise() {
@@ -27,7 +27,7 @@ void Block::rotateCounterClkwise() {
     int newCol = -cell->getRow();
     cell->setCoords(newRow, newCol);
   }
-  notify();
+  notifyObservers();
 }
 
 // to-do : check if can't be shifted further
@@ -36,7 +36,7 @@ void Block::shiftLeft(int px) {
     int newRow = cell->getRow() - px;
     cell->setCoords(newRow, cell->getCol());
   }
-  notify();
+  notifyObservers();
 }
 
 // to-do : check if can't be shifted further
@@ -45,7 +45,7 @@ void Block::shiftRight(int px) {
     int newRow = cell->getRow() + px;
     cell->setCoords(newRow, cell->getCol());
   }
-  notify();
+  notifyObservers();
 }
 
 // to-do : check if can't be shifted further
@@ -54,7 +54,7 @@ void Block::shiftUp(int px) {
     int newCol = cell->getCol() + px;
     cell->setCoords(cell->getRow(), newCol);
   }
-  notify();
+  notifyObservers();
 }
 
 // to-do : check if can't be shifted further
@@ -63,12 +63,24 @@ void Block::shiftDown(int px) {
     int newCol = cell->getCol() - px;
     cell->setCoords(cell->getRow(), newCol);
   }
-  notify();
+  notifyObservers();
 }
 
 void Block::display() const {
-
+  
 }
+
+// This `update` method is called when the Block as an Observer
+// is notified by the Subjects it is observing.
+void Block::update(Subject &subject) {
+  // Assuming that Cell observes other Cells, it will update its state based on changes in those Cells.
+  // If this is not the case, this method will need to be adapted accordingly.
+  
+  // We should safely check if whoNotified is a Cell
+  Block* changedCell = dynamic_cast<Block*>(&subject);
+  // If there are other Subjects that Cell observes, handle them with additional checks and logic.
+}
+
 
 
 // IBlock

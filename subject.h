@@ -10,10 +10,8 @@ class Subject {
 public:
     void attach(Observer *o); // Attach an observer
     void detach(Observer *o); 
-    virtual void notify(Cell &c) = 0;
     void notifyObservers(); // Notify only the attached observers of a change in this cell
-    
-    ~Subject();
+    virtual ~Subject() = default;
 };
 
 #endif // SUBJECT_H 

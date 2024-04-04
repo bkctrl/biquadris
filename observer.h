@@ -1,11 +1,12 @@
-#ifndef _OBSERVER_H_
-#define _OBSERVER_H_
+#ifndef OBSERVER_H
+#define OBSERVER_H
 
-class Cell; // class 
+class Subject;  // Forward declaration to resolve circular dependency
 
-class Observer { // is an abstract class
- public:
-  virtual void update(); // Not sure where to put notify function yet
-  virtual ~Observer() = default;
+class Observer {
+public:
+    virtual void update(Subject& subject) = 0; // Pass the Subject that is calling the update
+    virtual ~Observer() = default;
 };
-#endif
+
+#endif // OBSERVER_H

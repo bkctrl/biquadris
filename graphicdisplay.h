@@ -1,5 +1,5 @@
-#ifndef __GRAPHICDISPLAY_H_
-#define __GRAPHICDISPLAY_H_
+#ifndef GRAPHICDISPLAY_H
+#define GRAPHICDISPLAY_H
 
 #include <iostream>
 #include <vector>
