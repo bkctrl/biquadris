@@ -6,24 +6,19 @@
 #include "subject.h"
 #include <vector>
 
-// add Heavy
-// add StarBlock class
-
-// enum blockType {I,J,L,O,S,Z,T};
-
 class Block : public Observer, public Subject {
   protected:
     char letter; // The letter of the block
-    int creationLevel; // The level at which the block was created
+    int level; // The level at which the block was created
     bool isHeavy = false; // Whether the block is heavy
-    std::vector<Cell*> occupiedCells; // contains the coordinates the cells cover 
+    std::vector<Cell*> blockCells; // contains the coordinates the cells cover 
 
-    int currentOrientation; // The current orientation of the block
+    int orientation; // The current orientation of the block
     int color; // Color identifier for the block
-    Grid& gameGrid; // Reference to the grid containing the block
+    Grid& grid; // Reference to the grid containing the block
 
-    int positionX; // X position of the "anchor" cell for transformations
-    int positionY; // Y position of the "anchor" cell for transformations
+    int col = 7; // X position of the "anchor" cell for transformations
+    int row = 2; // Y position of the "anchor" cell for transformations
 
   public:
     Block(char type, int orientation, Grid& grid, int x, int y, int level); // constructor
@@ -33,7 +28,7 @@ class Block : public Observer, public Subject {
     char getLetter() const; // return the letter of block
     int getColor() const; // return the color of the block
     bool isCleared() const; // check if the block is cleared
-    int getCreationLevel() const; // get the creation level of the block
+    int getLevel() const; // get the creation level of the block
 
     bool isValidPlacement(Cell& cell, int y, int x) const; // check if the block can be placed at the given cell
     Cell** getOccupiedCells(); // return the cells that the block occupies
@@ -149,20 +144,20 @@ class Block : public Observer, public Subject {
 //     void display() const override;
 // };
 
-class StarBlock : public Block {
-  public:
-    StarBlock(int lvl);
-    StarBlock(int lvl, const char letter);
-    ~StarBlock();
-    void init() override;
-    blockType getType() const { return type; }
-    void rotateClkwise() override;
-    void rotateCounterClkwise() override;
-    void shiftLeft(int px) override;
-    void shiftRight(int px) override;
-    void shiftUp(int px) override;
-    void shiftDown(int px) override;
-    void display() const override;
-};
+// class StarBlock : public Block {
+//   public:
+//     StarBlock(int lvl);
+//     StarBlock(int lvl, const char letter);
+//     ~StarBlock();
+//     void init() override;
+//     blockType getType() const { return type; }
+//     void rotateClkwise() override;
+//     void rotateCounterClkwise() override;
+//     void shiftLeft(int px) override;
+//     void shiftRight(int px) override;
+//     void shiftUp(int px) override;
+//     void shiftDown(int px) override;
+//     void display() const override;
+// };
 
 #endif

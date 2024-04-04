@@ -1,41 +1,42 @@
 #include "cell.h"
 #include <string>
 
-Cell::Cell(int x, int y, Grid *grid): posX{x}, posY{y}, occupied{false}, currentBlock{nullptr}, parentGrid{grid} {}
+Cell::Cell(int x, int y, Grid *grid): 
+    col{x}, row{y}, occupied{false}, block{nullptr}, parentGrid{grid} {}
 
 bool Cell::isOccupied() {
     return occupied;
 }
 
-void Cell::updateCell(bool newoccupied, Block *newCurrentBlock){
+void Cell::updateCell(bool newoccupied, Block *newblock){
     occupied = newoccupied;
-    currentBlock = newCurrentBlock;
+    block = newblock;
     this->notifyObservers();
 }
 
 void Cell::swapCell(Cell &other) {
     std::swap(occupied, other.occupied);
-    std::swap(currentBlock, other.currentBlock);
+    std::swap(block, other.block);
     this->notifyObservers();
     other.notifyObservers();
 }
 
-int Cell::getX() {
-    return posX;
+int Cell::getCol() {
+    return col;
 }
 
-int Cell::getY() {
-    return posY;
+int Cell::getRow() {
+    return row;
 }
 
 Block* Cell::getOccupyingBlock(){
-    return currentBlock;
+    return block;
 }
 
-void Cell::incrementY(){
-    ++posY;
+void Cell::incrementRow(){
+    ++row;
 }
 
-Grid* Cell::getParentGrid(){
-    return parentGrid;
+Grid* Cell::getGrid(){
+    return grid;
 }

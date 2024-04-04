@@ -1,9 +1,8 @@
 #include "block.h"
 
-// to-do : implement display() in each block
-Block::Block(int level, char letter) : level(level), letter(letter) {
-  init(letter);
-}
+Block::Block(char type, int orientation, Grid& grid, int x, int y, int level) 
+    : letter(type), orientation(orientation), grid(grid), col(x), 
+    row(y), level(level) {}
 
 // Block::blockType getType() { return type; } // return the type of block
 // block:: validity check 
@@ -16,29 +15,59 @@ Block::~Block() {
   blockCells.clear();
 }
 
+char Block::getLetter() const { return letter; }
+int Block::getColor() const {}
+bool Block::isCleared() const {}
+int Block::getLevel() const { return level; }
+
+bool Block::isValidPlacement(Cell& cell, int y, int x) const {
+
+
+}
+Cell** Block::getOccupiedCells() {
+
+
+}
+void Block::removeFromCell(Cell& cell) {
+
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 void Block::rotateClkwise() {
   /*std::vector <Cell *> newPos;
   // do sth to newPos 
   // isvalidMove on the final pos 
   if (isValidMove(,I)){ 
   }*/
-  for (Cell* cell : blockCells) {
-    int newRow = -cell->getCol();
-    int newCol = cell->getRow();
-    cell->setCoords(newRow, newCol);
-  }
-  if (isHeavy) shiftDown(1);
-  notifyObservers();
+  // for (Cell* cell : blockCells) {
+  //   int newRow = -cell->getCol();
+  //   int newCol = cell->getRow();
+  //   cell->setCoords(newRow, newCol);
+  // }
+  // if (isHeavy) shiftDown(1);
+  // notifyObservers();
 }
 
 void Block::rotateCounterClkwise() {
-  for (Cell* cell : blockCells) {
-    int newRow = cell->getCol();
-    int newCol = -cell->getRow();
-    cell->setCoords(newRow, newCol);
-  }
-  if (isHeavy) shiftDown(1);
-  notifyObservers();
+  // for (Cell* cell : blockCells) {
+  //   int newRow = cell->getCol();
+  //   int newCol = -cell->getRow();
+  //   cell->setCoords(newRow, newCol);
+  // }
+  // if (isHeavy) shiftDown(1);
+  // notifyObservers();
 }
 
 // to-do : check if can't be shifted further

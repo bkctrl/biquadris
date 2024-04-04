@@ -14,7 +14,7 @@ class Level;
 
 class Grid : public Subject {
 private:
-    std::vector<std::vector<Cell>> theGrid;
+    std::vector< std::vector<Cell> > theGrid;
     int gridHeight;
     int gridWidth;
     std::vector<Block*> blocksOnGrid;
@@ -44,7 +44,7 @@ public:
 
     void changeLevel(Level* newLevelPtr);
     int getCurrentLevelNumber() const;
-    std::vector<std::vector<Cell>>& accessGrid();
+    std::vector< std::vector<Cell> >& accessGrid();
     int getPlayerId() const;
     int getCurrentScore() const;
     void setCurrentScore(int score);
