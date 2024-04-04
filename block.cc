@@ -1,9 +1,11 @@
 #include "block.h"
 
 // to-do : implement display() in each block
-Block::Block(int level) : lvl(lvl) {}
+Block::Block(int level, const char letter) : lvl(lvl), letter(letter) {}
 
 // Block::blockType getType() { return type; } // return the type of block
+// block:: validity check 
+// pass in: newmovement (ptrs to 4 cells that represents the final destination) + actual block (char)
 
 Block::~Block() {
   for (Cell* cell : blockCells) {
@@ -32,6 +34,7 @@ void Block::rotateCounterClkwise() {
 
 // to-do : check if can't be shifted further
 void Block::shiftLeft(int px) {
+  // have a check for validity of move
   for (Cell* cell : blockCells) {
     int newRow = cell->getRow() - px;
     cell->setCoords(newRow, cell->getCol());
@@ -73,7 +76,7 @@ void Block::display() const {
 
 // IBlock
 
-IBlock::IBlock(int lvl) : Block(lvl) {
+IBlock::IBlock(int lvl, const char letter) : Block(lvl, letter) {
   init();
 }
 

@@ -8,9 +8,9 @@
 // include the various block subclasses
 
 
-Block * Level::createBlock(char charInput, int levelNum){
+Block * Level::createBlock(int levelNum, char charInput){
     if (charInput == 'I'){
-        return new IBlock{levelNum};
+        return new IBlock(levelNum, charInput);
     } else if (charInput == 'S'){
         return new SBlock{levelNum};
     } else if (charInput == 'J'){

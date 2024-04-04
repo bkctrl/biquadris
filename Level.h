@@ -22,7 +22,7 @@ class Level {
     
     public: 
     // maybe default ctor not needed: Level(int levelNum, const std::string& FileName);
-    Block * createBlock (char, int); // creates block based on the specifc type and input it to the corresponding level
+    Block * createBlock (int, char); // creates block based on the specifc type and input it to the corresponding level
     void setSeed(int);
 
     // int getLevelnum() const; 

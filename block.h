@@ -17,11 +17,13 @@ class Block  : public Observer {
     std::vector<Cell*> blockCells; // contains the coordinates the cells cover 
     std::vector<Observer*> observers; // list of observers
     int lvl;
+    const char letter;
 
   public:
     blockType getType() const { return type; } // return the type of block
     // Block(blockType type) : type(type) {} // default parametric constructor
     Block(int level);
+    Block(int level, const char letter);
     virtual void init(); // intialize shape and position
     virtual void rotateClkwise(); 
     virtual void rotateCounterClkwise();
@@ -54,6 +56,7 @@ class Block  : public Observer {
 class IBlock : public Block {
   public:
     IBlock(int lvl);
+    IBlock(int lvl, const char letter);
     ~IBlock();
     void init() override;
     blockType getType() const { return type; }
