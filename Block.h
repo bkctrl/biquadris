@@ -19,12 +19,14 @@ class Block : public Observer, public Subject {
     std::vector<Observer*> observers; // list of observers
     int lvl;
     const char letter;
+    char charInput;
 
   public:
       blockType getType() const { return type; } // return the type of block
       // Block(blockType type) : type(type) {} // default parametric constructor
-      Block(int lvl);
-      Block(int lvl, const char letter);
+      Block(int level);
+      Block(int level, const char letter);
+      bool isValidMove(vector<Cell *> updatedBlockCells, char charInput);
       virtual void init(); // intialize shape and position
       virtual void rotateClkwise(); 
       virtual void rotateCounterClkwise();
