@@ -33,8 +33,8 @@ Block* Cell::getOccupyingBlock(){
     return block;
 }
 
-void Cell::incrementRow(){
-    ++row;
+void Cell::shiftRow(int factor){
+    row += factor;
 }
 
 void Cell::shiftCol(int factor){
