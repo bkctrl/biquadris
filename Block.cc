@@ -69,6 +69,21 @@ void Block::shiftDown(int px) {
   notifyObservers();
 }
 
+bool block::isValidMove(vector<Cell *> updatedBlockCells, char charInput){
+   for (int i = 0; i < blockCells.size(); i++) {
+        blockCells[i]->setLetter(""); // assign old curblock empty letter
+    }
+    for (int i = 0; i < newBlockCells.size(); i++) {
+        if (newBlockCells[i]->isFilled()) { // if cell is not filled then assign it letter
+            for (int i = 0; i < blockCells.size(); i++) {
+                blockCells[i]->setLetter(charInput); // 
+            }
+            return false;
+        }
+    }
+    return true; // newBlockCells does not overlap any existing blocks
+}
+
 void Block::display() const {
   
 }
