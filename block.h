@@ -18,11 +18,11 @@ class Block : public Observer, public Subject {
     int color; // Color identifier for the block
     Grid& grid; // Reference to the grid containing the block
 
-    int col = 7; // X position of the "anchor" cell for transformations
-    int row = 2; // Y position of the "anchor" cell for transformations
+    int leftCol = 0; // X position of the "anchor" cell for transformations
+    int bottomRow = 3; // Y position of the "anchor" cell for transformations
 
   public:
-    Block(char type, int orientation, Grid& grid, int row, int col, int level); // constructor
+    Block(char type, int orientation, Grid& grid, int bottomRow, int leftCol, int level); // constructor
     virtual ~Block(); // destructor
 
     // Methods for block manipulation 
@@ -43,7 +43,6 @@ class Block : public Observer, public Subject {
     void shiftRight(); // move the block right by one cell
     void shiftDown(); // move the block down by one cell
     void hardDrop(); // drop the block to the lowest possible position
-    void centerDrop(); // drop the block to the center of the grid
 };
 
 
@@ -95,104 +94,4 @@ class StarBlock : public Block {
     void rotateClockwise() override;
     void rotateCounterClockwise() override;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// class JBlock : public Block {
-//   public:
-//     JBlock(int level);
-//     JBlock(int level, char letter);
-//  
-//     void rotateClkwise() override;
-//     void rotateCounterClkwise() override;
-//     void shiftLeft();
-//     void shiftRight();
-//     void shiftDown();
-// };
-
-// class LBlock : public Block {
-//   public:
-//     LBlock(int level);
-//     LBlock(int level, char letter);
-//  
-//     void rotateClkwise() override;
-//     void rotateCounterClkwise() override;
-//     void shiftLeft();
-//     void shiftRight();
-//     void shiftDown();
-// };
-
-// class OBlock : public Block {
-//   public:
-//     OBlock(int level);
-//     OBlock(int level, char letter);
-//  
-//     void rotateClkwise() override;
-//     void rotateCounterClkwise() override;
-//     void shiftLeft();
-//     void shiftRight();
-//     void shiftDown();
-// };
-
-// class SBlock : public Block {
-//   public:
-//     SBlock(int level);
-//     SBlock(int level, char letter);
-//  
-//     void rotateClkwise() override;
-//     void rotateCounterClkwise() override;
-//     void shiftLeft();
-//     void shiftRight();
-//     void shiftDown();
-// };
-
-// class ZBlock : public Block {
-//   public:
-//     ZBlock(int level);
-//     ZBlock(int level, char letter);
-//  
-//     void rotateClkwise() override;
-//     void rotateCounterClkwise() override;
-//     void shiftLeft();
-//     void shiftRight();
-//     void shiftDown();
-// };
-
-// class TBlock : public Block {
-//   public:
-//     TBlock(int level);
-//     TBlock(int level, char letter);
-//  
-//     void rotateClkwise() override;
-//     void rotateCounterClkwise() override;
-//     void shiftLeft();
-//     void shiftRight();
-//     void shiftDown();
-// };
-
-// class StarBlock : public Block {
-//   public:
-//     StarBlock(int lvl);
-//     StarBlock(int lvl, const char letter);
-//     ~StarBlock();
-//     void init();
-//  
-//     void rotateClkwise() override;
-//     void rotateCounterClkwise() override;
-//     void shiftLeft();
-//     void shiftRight();
-//     void shiftDown();
-// };
-
 #endif
