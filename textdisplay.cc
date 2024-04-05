@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-TextDisplay::TextDisplay() : theDisplay(18, std::vector<char>(11, 'C')), width(11), height(18) {}
+TextDisplay::TextDisplay() : theDisplay(18, std::vector<char>(11, ' ')), width(11), height(18) {}
 
 // updates the display with the changed cell state upon notification from said cell
 void TextDisplay::notify(Cell &c) {

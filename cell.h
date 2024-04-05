@@ -2,6 +2,7 @@
 #define CELL_H
 
 #include <string>
+#include <vector>
 #include "observer.h"
 
 class Block;
