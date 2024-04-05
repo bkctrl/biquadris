@@ -8,17 +8,17 @@ TextDisplay::TextDisplay() : theDisplay(18, std::vector<char>(11, ' ')), width(1
 void TextDisplay::notify(Cell &c) {
   int row = c.getRow();
   int col = c.getCol();
-  theDisplay[row][col] = c.isFilled() ? ' ' : c.getLetter();
+  theDisplay[row][col] = c.isOccupied() ? ' ' : c.getOccupyingBlock()->getLetter();
 }
 
-void TextDisplay::displayboard() {
-  for (const auto &row : theDisplay) { // for every row
-    for (char cell : row) { // for every cell in each row
-      std::cout << cell;
-    }
-    std::cout << std::endl;
-  }
-}
+// void TextDisplay::displayboard() {
+//   for (const auto &row : theDisplay) { // for every row
+//     for (char cell : row) { // for every cell in each row
+//       std::cout << cell;
+//     }
+//     std::cout << std::endl;
+//   }
+// }
 
 
 std::ostream &operator<<(std::ostream &out, const TextDisplay &td) {

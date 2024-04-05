@@ -35,7 +35,7 @@ class Block : public Observer, public Subject {
     Cell** getOccupiedCells(); // return the cells that the block occupies
     void removeFromCell(Cell& cell); // remove the block from a cell
 
-    virtual void init() = 0; // initialize the cells of the block
+    void init(); // initialize the cells of the block
     virtual void rotateClockwise() = 0; // rotate the block clockwise
     virtual void rotateCounterClockwise() = 0; // rotate the block counterclockwise
 

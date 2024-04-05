@@ -3,15 +3,17 @@
 #include "grid.h"
 
 Grid::Grid(int playerId, TextDisplay* td): 
-    playerId{playerId}, gridWidth{11}, gridHeight{18}, td{td},
-    currentScore{0}, highScore{0}, currentLevelNumber{0}, currentLevel{nullptr}, activeBlock{nullptr},
+    playerId{playerId}, gridWidth{11}, gridHeight{18}, td(td),
+    currentScore{0}, highScore{0},
+    // currentLevelNumber{0}, currentLevel{nullptr},
+    activeBlock{nullptr},
     nextBlock{nullptr}, blindModeActive{false}, heavyModeActive{false}, forceModeActive{false} {
     init();
 }
 
 Grid::~Grid() {
     delete textDisplay;
-    delete graphicsDisplay;
+    // delete graphicsDisplay;
     clearBlocks();
 }
 
@@ -21,9 +23,9 @@ void Grid::init() {
         for (int col = 0; col < gridWidth; col++) {
             theGrid[row][col] = Cell(col, row, this);
             theGrid[row][col].attach(textDisplay); // Attach textDisplay to each cell
-            if (graphicsDisplay) {
-                theGrid[row][col].attach(graphicsDisplay);
-            }   
+            // if (graphicsDisplay) {
+            //     theGrid[row][col].attach(graphicsDisplay);
+            // }
         }
     }
 }
@@ -51,43 +53,6 @@ void Grid::clearBlocks() {
         delete block;
     }
     blocksOnGrid.clear();
-}
-
-bool Grid::createNextBlock() {
-    Block *newBlock = currentLevel->createBlock(currentLevelNumber, nextBlock->getType());
-    blocksOnGrid.push_back(newBlock);
-    activeBlock = nextBlock;
-    nextBlock = newBlock;
-    if (activeBlock) {
-        activeBlock->initializeTiles();
-        Cell **cells = activeBlock->getTiles();
-        for (int i=0; i < 4; i++){
-            if (cells[i]->isOccupied()){
-                return true;
-            }
-            cells[i]->updateTile(true, activeBlock);
-        }
-    }
-    return false;
-}
-
-bool Grid::createCenterBlock() {
-    activeBlock = currentLevel->createCenterBlock();
-    if (activeBlock) {
-        blocksOnGrid.push_back(activeBlock);
-        return true;
-    }
-    return false;
-}
-
-bool Grid::switchActiveBlock(const std::string& blockType) {
-    Block* newBlock = currentLevel->createBlock(blockType);
-    if (newBlock) {
-        blocksOnGrid.emplace_back(newBlock);
-        activeBlock = newBlock;
-        return true;
-    }
-    return false;
 }
 
 Block* Grid::getNextBlock() const {
@@ -132,11 +97,6 @@ void Grid::removeLines(const vector<int>& fullLines) {
     }
 }
 
-void Grid::changeLevel(int newLevel, Level* newLevelPtr) {
-    currentLevelNumber = newLevel;
-    currentLevel = newLevelPtr;
-}
-
 int Grid::getPlayerId() const {
     return playerId;
 }
@@ -149,3 +109,47 @@ std::ostream& operator<<(std::ostream& out, const Grid& grid) {
     out << *grid.td;
     return out;
 }
+
+// LEVEL STUFF
+
+// bool Grid::createNextBlock() {
+//     Block *newBlock = currentLevel->createBlock(currentLevelNumber, nextBlock->getType());
+//     blocksOnGrid.push_back(newBlock);
+//     activeBlock = nextBlock;
+//     nextBlock = newBlock;
+//     if (activeBlock) {
+//         activeBlock->initializeTiles();
+//         Cell **cells = activeBlock->getTiles();
+//         for (int i=0; i < 4; i++){
+//             if (cells[i]->isOccupied()){
+//                 return true;
+//             }
+//             cells[i]->updateTile(true, activeBlock);
+//         }
+//     }
+//     return false;
+// }
+
+// bool Grid::createCenterBlock() {
+//     activeBlock = currentLevel->createCenterBlock();
+//     if (activeBlock) {
+//         blocksOnGrid.push_back(activeBlock);
+//         return true;
+//     }
+//     return false;
+// }
+
+// bool Grid::switchActiveBlock(const std::string& blockType) {
+//     Block* newBlock = currentLevel->createBlock(blockType);
+//     if (newBlock) {
+//         blocksOnGrid.emplace_back(newBlock);
+//         activeBlock = newBlock;
+//         return true;
+//     }
+//     return false;
+// }
+
+// void Grid::changeLevel(int newLevel, Level* newLevelPtr) {
+//     currentLevelNumber = newLevel;
+//     currentLevel = newLevelPtr;
+// }

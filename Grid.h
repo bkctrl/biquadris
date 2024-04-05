@@ -11,10 +11,10 @@
 #include "subject.h"
 
 // class Level;
+class TextDisplay;
 
 class Grid : public Subject {
 private:
-    std::vector< std::vector<Cell> > theGrid;
     int gridHeight;
     int gridWidth;
     std::vector<Block*> blocksOnGrid;
@@ -32,8 +32,9 @@ private:
     bool switchCurrentBlock(const std::string& blockType);
     
 public:
-    Grid(int player, TextDisplay* td, GraphicsDisplay* gd);
+    Grid(int player, TextDisplay* td);
     ~Grid();
+    std::vector< std::vector<Cell> > theGrid;
 
     void init();
     void reset();
@@ -43,9 +44,9 @@ public:
     Block* getNextBlock() const;
     Block* getCurrentBlock() const;
 
-    void changeLevel(Level* newLevelPtr);
-    int getCurrentLevelNumber() const;
-    std::vector< std::vector<Cell> >& accessGrid();
+    // void changeLevel(Level* newLevelPtr);
+    // int getCurrentLevelNumber() const;
+    std::vector< std::vector<Cell> > accessGrid();
     int getPlayerId() const;
     int getCurrentScore() const;
     void setCurrentScore(int score);

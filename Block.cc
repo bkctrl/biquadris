@@ -157,96 +157,96 @@ void Block::rotateCounterClockwise() {
 
 void Block::shiftLeft() {
   // have a check for validity of move
-  bool isValid = true;
-  for (Cell* cell : blockCells) {
-    int newCol = cell->getCol() - 1;
-    int newRow = cell->getRow();
-    if (level == 3 || level == 4) ++newRow;
-    if (isHeavy) newRow += 2;
-    // item == grid.accessGrid()[newRow][newCol]
-    if (!isValidPlacement(newRow, newCol) &&
-         std::find(blockCells.begin(), blockCells.end(), grid.accessGrid()[newRow][newCol]) == blockCells.end()) {
-            isValid = false;  
-            break;
-    }
-  }
-  if (isValid) {
-    for (Cell* cell : blockCells) {
-      if (level == 3 || level == 4) cell->shiftRow(1);;
-      if (isHeavy) cell->shiftRow(2);
-      cell->shiftCol(-1);
-    }
-  }
-  notifyObservers();
+  // bool isValid = true;
+  // for (Cell* cell : blockCells) {
+  //   int newCol = cell->getCol() - 1;
+  //   int newRow = cell->getRow();
+  //   if (level == 3 || level == 4) ++newRow;
+  //   if (isHeavy) newRow += 2;
+  //   // item == grid.accessGrid()[newRow][newCol]
+  //   if (!isValidPlacement(newRow, newCol) &&
+  //        std::find(blockCells.begin(), blockCells.end(), grid.theGrid[newRow][newCol]) == blockCells.end()) {
+  //           isValid = false;  
+  //           break;
+  //   }
+  // }
+  // if (isValid) {
+  //   for (Cell* cell : blockCells) {
+  //     if (level == 3 || level == 4) cell->shiftRow(1);;
+  //     if (isHeavy) cell->shiftRow(2);
+  //     cell->shiftCol(-1);
+  //   }
+  // }
+  // notifyObservers();
 }
 
 
 void Block::shiftRight() {
   // have a check for validity of move
-  bool isValid = true;
-  for (Cell* cell : blockCells) {
-    int newCol = cell->getCol() + 1;
-    int newRow = cell->getRow();
-    if (level == 3 || level == 4) ++newRow;
-    if (isHeavy) newRow += 2;
-    if (!isValidPlacement(newRow, newCol) &&
-         std::find(blockCells.begin(), blockCells.end(), grid.accessGrid()[newRow][newCol]) == blockCells.end()) {
-          isValid = false;
-          break;
-    }
-  }
-  if (isValid) {
-    for (Cell* cell : blockCells) {
-      if (level == 3 || level == 4) cell->shiftRow(1);;
-      if (isHeavy) cell->shiftRow(2);
-      cell->shiftCol(1);
-    }
-  }
-  notifyObservers();
+  // bool isValid = true;
+  // for (Cell* cell : blockCells) {
+  //   int newCol = cell->getCol() + 1;
+  //   int newRow = cell->getRow();
+  //   if (level == 3 || level == 4) ++newRow;
+  //   if (isHeavy) newRow += 2;
+  //   if (!isValidPlacement(newRow, newCol) &&
+  //        std::find(blockCells.begin(), blockCells.end(), grid.accessGrid()[newRow][newCol]) == blockCells.end()) {
+  //         isValid = false;
+  //         break;
+  //   }
+  // }
+  // if (isValid) {
+  //   for (Cell* cell : blockCells) {
+  //     if (level == 3 || level == 4) cell->shiftRow(1);;
+  //     if (isHeavy) cell->shiftRow(2);
+  //     cell->shiftCol(1);
+  //   }
+  // }
+  // notifyObservers();
 }
 
 
 void Block::shiftDown() {
   // have a check for validity of move
-  bool isValid = true;
-  for (Cell* cell : blockCells) {
-    int newCol = cell->getCol();
-    int newRow = cell->getRow();
-    if (level == 3 || level == 4) ++newRow;
-    if (!isValidPlacement(newRow, newCol) &&
-         std::find(blockCells.begin(), blockCells.end(), grid.accessGrid()[newRow][newCol]) == blockCells.end()) {
-          isValid = false;
-          break;
-    }
-  }
-  if (isValid) {
-    for (Cell* cell : blockCells) {
-      if (level == 3 || level == 4) cell->shiftRow(1);;
-      cell->shiftRow(1);
-    }
-  }
-  notifyObservers();
+  // bool isValid = true;
+  // for (Cell* cell : blockCells) {
+  //   int newCol = cell->getCol();
+  //   int newRow = cell->getRow();
+  //   if (level == 3 || level == 4) ++newRow;
+  //   if (!isValidPlacement(newRow, newCol) &&
+  //        std::find(blockCells.begin(), blockCells.end(), grid.accessGrid()[newRow][newCol]) == blockCells.end()) {
+  //         isValid = false;
+  //         break;
+  //   }
+  // }
+  // if (isValid) {
+  //   for (Cell* cell : blockCells) {
+  //     if (level == 3 || level == 4) cell->shiftRow(1);;
+  //     cell->shiftRow(1);
+  //   }
+  // }
+  // notifyObservers();
 }
 
 void Block::hardDrop() {
-  bool canDrop = true;
-  int minRow = 17;
-  for (Cell* cell : blockCells) {
-    int newRow = cell->getRow();
-    for (int i = 0; i < 17-bottomRow; ++i) {
-      ++newRow;
-      if (!isValidPlacement(newRow, cell->getCol()) &&
-         std::find(blockCells.begin(), blockCells.end(), grid.accessGrid()[newRow][cell->getCol()]) == blockCells.end()) { // a cell collides with a cell of another block
-         // this means check the next cell in blockcells
-        if (newRow-1 < minRow) minRow = newRow - 1; // collision at newRow
-        break;
-      }
-    }
-  }
-  for (Cell* cell : blockCells) {
-    cell->shiftRow(minRow - bottomRow);
-  }
-  notifyObservers();
+  // bool canDrop = true;
+  // int minRow = 17;
+  // for (Cell* cell : blockCells) {
+  //   int newRow = cell->getRow();
+  //   for (int i = 0; i < 17-bottomRow; ++i) {
+  //     ++newRow;
+  //     if (!isValidPlacement(newRow, cell->getCol()) &&
+  //        std::find(blockCells.begin(), blockCells.end(), grid.accessGrid()[newRow][cell->getCol()]) == blockCells.end()) { // a cell collides with a cell of another block
+  //        // this means check the next cell in blockcells
+  //       if (newRow-1 < minRow) minRow = newRow - 1; // collision at newRow
+  //       break;
+  //     }
+  //   }
+  // }
+  // for (Cell* cell : blockCells) {
+  //   cell->shiftRow(minRow - bottomRow);
+  // }
+  // notifyObservers();
 }
 
 

@@ -4,6 +4,7 @@
 #include "observer.h"
 #include "subject.h"
 #include "cell.h"
+#include "block.h"
 #include <string>
 
 class TextDisplay : public Observer {
