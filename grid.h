@@ -19,7 +19,7 @@ private:
     int gridWidth;
     std::vector<Block*> blocksOnGrid;
     int playerId;
-    Block* activeBlock;
+    Block* currentBlock;
     Block* nextBlock;
     int currentScore;
 
@@ -28,19 +28,19 @@ private:
     void removeLines(const std::vector<int>& fullLines);
     int clearFullLines();
     bool createCenterBlock();
-    bool switchActiveBlock(const std::string& blockType);
+    bool switchCurrentBlock(const std::string& blockType);
     
 public:
     Grid(int player, TextDisplay* td, GraphicsDisplay* gd);
     ~Grid();
 
-    void initialize();
-    void resetGrid();
+    void init();
+    void reset();
 
     bool createNextBlock();
 
     Block* getNextBlock() const;
-    Block* getActiveBlock() const;
+    Block* getCurrentBlock() const;
 
     void changeLevel(Level* newLevelPtr);
     int getCurrentLevelNumber() const;
@@ -48,11 +48,6 @@ public:
     int getPlayerId() const;
     int getCurrentScore() const;
     void setCurrentScore(int score);
-
-    // // TODO: Observer pattern methods should be implemented in grid like in A4, remove the 3 funcs below
-    // void attach(Observer* observer);
-    // void detach(Observer* observer);
-    // void notifyObservers();
 
     friend std::ostream& operator<<(std::ostream& out, const Grid& grid);
 };

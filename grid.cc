@@ -8,11 +8,15 @@ Grid::~Grid() {
     clearBlocks();
 }
 
-void Grid::initialize() {
+void Grid::init() {
+    textDisplay = new TextDisplay(gridHeight, gridWidth);
+    if (graphicsDisplay) {
+        graphicsDisplay = new GraphicsDisplay(gridHeight, gridWidth);
+    }
     theGrid.resize(gridHeight, std::vector<Cell>(gridWidth, Cell{0, 0, this}));
     for (int row = 0; row < gridHeight; row++) {
         for (int col = 0; col < gridWidth; col++) {
-            theGrid[row][col] = Cell(col, row, this);
+            theGrid[row][col] = new Cell(col, row, this);
             theGrid[row][col].attach(textDisplay); // Attach textDisplay to each cell
             if (graphicsDisplay) {
                 theGrid[row][col].attach(graphicsDisplay);

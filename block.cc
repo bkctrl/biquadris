@@ -15,8 +15,35 @@ Block::~Block() {
   blockCells.clear();
 }
 
-int Block::getColor() const {}
-bool Block::isCleared() const {}
+bool Block::isCleared() const {
+  for (Cell* cell : blockCells) {
+    if (!cell->isOccupied()) {
+      return false;
+    }
+  }
+  return true;
+}
+
+int Block::getColor() const {
+  switch (letter) {
+    case 'I':
+      return 0;
+    case 'J':
+      return 1;
+    case 'L':
+      return 2;
+    case 'O':
+      return 3;
+    case 'S':
+      return 4;
+    case 'Z':
+      return 5;
+    case 'T':
+      return 6;
+    default:
+      return 7;
+  }
+}
 
 bool Block::isValidPlacement(int row, int col) const {
   if (col < 0 || col > 11 || row < 0 || row > 17) {
@@ -37,46 +64,39 @@ void Block::removeFromCell(Cell& cell) {
 void Block::init() {
   switch (letter) {
     case 'I':
-      blockCells.push_back(new Cell(0, 0, &grid)); 
-      blockCells.push_back(new Cell(1, 0, &grid));
-      blockCells.push_back(new Cell(2, 0, &grid));
-      blockCells.push_back(new Cell(3, 0, &grid));
+      if (isValidPlacement(3, 0) && isValidPlacement(3, 1) && isValidPlacement(3, 2) && isValidPlacement(3, 3)) {
+        blockCells.push_back(new Cell(3, 0, &grid)); 
+        blockCells.push_back(new Cell(3, 1, &grid));
+        blockCells.push_back(new Cell(3, 2, &grid));
+        blockCells.push_back(new Cell(3, 3, &grid));
+      }
       break;
     case 'J':
-      blockCells.push_back(new Cell(0, 0, &grid));
-      blockCells.push_back(new Cell(0, 1, &grid));
-      blockCells.push_back(new Cell(1, 1, &grid));
-      blockCells.push_back(new Cell(2, 1, &grid));
+      if (isValidPlacement(2, 0) && isValidPlacement(3, 0) && isValidPlacement(3, 1) && isValidPlacement(3, 2)) {
+        blockCells.push_back(new Cell(2, 0, &grid));
+        blockCells.push_back(new Cell(3, 0, &grid));
+        blockCells.push_back(new Cell(3, 1, &grid));
+        blockCells.push_back(new Cell(3, 2, &grid));
+      }
       break;
     case 'L':
-      blockCells.push_back(new Cell(2, 0, &grid)); 
-      blockCells.push_back(new Cell(0, 1, &grid));
-      blockCells.push_back(new Cell(1, 1, &grid));
-      blockCells.push_back(new Cell(2, 1, &grid));
-      break;
-    case 'O':
-      blockCells.push_back(new Cell(0, 0, &grid));
-      blockCells.push_back(new Cell(1, 0, &grid));
-      blockCells.push_back(new Cell(0, 1, &grid));
-      blockCells.push_back(new Cell(1, 1, &grid));
-      break;
-    case 'S':
-      blockCells.push_back(new Cell(0, 0, &grid));
-      blockCells.push_back(new Cell(1, 0, &grid));
-      blockCells.push_back(new Cell(1, 1, &grid));
-      blockCells.push_back(new Cell(2, 1, &grid));
-      break;
-    case 'Z':
-      blockCells.push_back(new Cell(1, 0, &grid));
-      blockCells.push_back(new Cell(2, 0, &grid));
-      blockCells.push_back(new Cell(0, 1, &grid));
-      blockCells.push_back(new Cell(1, 1, &grid));
+      if (isValidPlacement(2, 0) && isValidPlacement(3, 0) && isValidPlacement(3, 1) && isValidPlacement(3, 2)) {
+        blockCells.push_back(new Cell(2, 1, &grid));
+        blockCells.push_back(new Cell(2, 2, &grid));
+        blockCells.push_back(new Cell(3, 0, &grid));
+        blockCells.push_back(new Cell(3, 1, &grid));
+      }
       break;
     case 'T':
-      blockCells.push_back(new Cell(1, 0, &grid));
-      blockCells.push_back(new Cell(0, 1, &grid));
-      blockCells.push_back(new Cell(1, 1, &grid));
-      blockCells.push_back(new Cell(2, 1, &grid));
+      if (isValidPlacement(2, 0) && isValidPlacement(2, 1) && isValidPlacement(2, 2) && isValidPlacement(3, 1)) {
+        blockCells.push_back(new Cell(2, 1, &grid));
+        blockCells.push_back(new Cell(2, 2, &grid));
+        blockCells.push_back(new Cell(2, 3, &grid));
+        blockCells.push_back(new Cell(3, 2, &grid));
+      }
+      break;
+    case '*':
+      blockCells.push_back(new Cell(3, 5, &grid));
       break;
     default:
       // Handle invalid letter here
@@ -99,6 +119,32 @@ void Block::rotateClockwise() {
   // }
   // if (isHeavy) shiftDown(1);
   // notifyObservers();
+}
+
+void Block::rotateClockwise() {
+    std::vector<Cell*> newCells;
+    // Assume bottom left cell of the block is the pivot
+    int pivotCol = leftCol;
+    int pivotRow = bottomRow;
+    
+    // Calculate new positions after rotation
+    for (Cell* cell : occupiedCells) {
+        int newCol = pivotCol + (cell->getRow() - pivotRow);
+        int newRow = pivotRow - (cell->getCol() - pivotCol);
+        
+        if (!gameGrid.isValidPosition(newCol, newRow) || gameGrid.isOccupied(newCol, newRow)) {
+            return; // Can't rotate due to boundary issues or cell being occupied
+        }
+        newCells.push_back(gameGrid.getCell(newCol, newRow));
+    }
+
+    // Perform the rotation since all new positions are valid
+    for (size_t i = 0; i < occupiedCells.size(); ++i) {
+        occupiedCells[i]->setOccupied(false);
+        newCells[i]->setOccupied(true);
+        newCells[i]->setBlock(this);
+    }
+    occupiedCells = newCells;
 }
 
 void Block::rotateCounterClockwise() {

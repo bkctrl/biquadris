@@ -1,16 +1,23 @@
 #ifndef COMMANDINTERPRETER_H
 #define COMMANDINTERPRETER_H
 
-#include "Grid.h" 
 #include <string>
-#include <sstream>
-#include <vector>
+#include <unordered_map>
+#include <functional>
+#include "gameengine.h"
+#include "grid.h"
 
 class CommandInterpreter {
+private:
+    GameEngine* gameEngine;
+    Grid* grid;
+    std::unordered_map<std::string, std::function<void()>> commandMap;
 
+    void initializeCommands();
+
+public:
+    explicit CommandInterpreter(GameEngine& engine, Grid& grid);
+    void interpretCommand(const std::string& input);
 };
 
-
-
-#endif // COMMANDINTERPRETER_H
-// take command and do shit/notify the gameengine 
+#endif //COMMANDINTERPRETER_H
