@@ -2,11 +2,13 @@
 #define CELL_H
 
 #include <string>
+#include "observer.h"
 
 class Block;
 class Grid;
 
 class Cell {
+    std::vector<Observer*> observers; // vector of observers
     bool occupied; // true if cell is occupied
     Block* block; // block that is occupying the cell
     int col; // x position of the cell
@@ -24,6 +26,11 @@ public:
     void shiftRow(int factor); // shifts the y position of the cell
     void shiftCol(int factor); // shifts the x position of the cell
     Grid* getGrid(); // returns the grid that the cell is in
+
+    // Subject methods
+    void attach(Observer *o); // Attach an observer
+    void detach(Observer *o); // Detach an observer
+    void notifyObservers(); // Notify only the attached observers of a change in this cell
 };
 
 #endif // CELL_H

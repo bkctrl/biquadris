@@ -21,6 +21,20 @@ void Cell::swapCell(Cell &other) {
     other.notifyObservers();
 }
 
+void Cell::attach(Observer *o) {
+    observers.emplace_back(o);
+}
+
+void Cell::detach(Observer *o) {
+    observers.erase(std::remove(observers.begin(), observers.end(), o), observers.end());
+}
+
+void Cell::notifyObservers() {
+    for (auto &ob : observers) {
+        ob->notify(*this);
+    }
+}
+
 int Cell::getCol() {
     return col;
 }
