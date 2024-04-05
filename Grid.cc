@@ -30,7 +30,7 @@ void Grid::init() {
     }
 }
 
-void Grid::resetGrid() {
+void Grid::reset() {
     if (currentScore > highScore) {
         highScore = currentScore;
     }
@@ -59,7 +59,7 @@ Block* Grid::getNextBlock() const {
     return nextBlock;
 }
 
-Block* Grid::getActiveBlock() const {
+Block* Grid::getCurrentBlock() const {
     return activeBlock;
 }
 
