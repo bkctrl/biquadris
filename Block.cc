@@ -102,12 +102,12 @@ void Block::init() {
 
 // ---------------------------------- ROTATIONS ----------------------------------
 
-void Block::rotateClockwise() {
-  /*std::vector <Cell *> newPos;
+// void Block::rotateClockwise() {
+  // std::vector <Cell *> newPos;
   // do sth to newPos 
   // isvalidMove on the final pos 
-  if (isValidMove(,I)){ 
-  }*/
+  // if (isValidMove(,I)){ 
+  // }
   // for (Cell* cell : blockCells) {
   //   int newRow = -cell->getCol();
   //   int newCol = cell->getRow();
@@ -115,32 +115,32 @@ void Block::rotateClockwise() {
   // }
   // if (isHeavy) shiftDown(1);
   // notifyObservers();
-}
+// }
 
 void Block::rotateClockwise() {
-    std::vector<Cell*> newCells;
-    // Assume bottom left cell of the block is the pivot
-    int pivotCol = leftCol;
-    int pivotRow = bottomRow;
+    // std::vector<Cell*> newCells;
+    // // Assume bottom left cell of the block is the pivot
+    // int pivotCol = leftCol;
+    // int pivotRow = bottomRow;
     
-    // Calculate new positions after rotation
-    for (Cell* cell : occupiedCells) {
-        int newCol = pivotCol + (cell->getRow() - pivotRow);
-        int newRow = pivotRow - (cell->getCol() - pivotCol);
+    // // Calculate new positions after rotation
+    // for (Cell* cell : occupiedCells) {
+    //     int newCol = pivotCol + (cell->getRow() - pivotRow);
+    //     int newRow = pivotRow - (cell->getCol() - pivotCol);
         
-        if (!gameGrid.isValidPosition(newCol, newRow) || gameGrid.isOccupied(newCol, newRow)) {
-            return; // Can't rotate due to boundary issues or cell being occupied
-        }
-        newCells.push_back(gameGrid.getCell(newCol, newRow));
-    }
+    //     if (!gameGrid.isValidPosition(newCol, newRow) || gameGrid.isOccupied(newCol, newRow)) {
+    //         return; // Can't rotate due to boundary issues or cell being occupied
+    //     }
+    //     newCells.push_back(gameGrid.getCell(newCol, newRow));
+    // }
 
-    // Perform the rotation since all new positions are valid
-    for (size_t i = 0; i < occupiedCells.size(); ++i) {
-        occupiedCells[i]->setOccupied(false);
-        newCells[i]->setOccupied(true);
-        newCells[i]->setBlock(this);
-    }
-    occupiedCells = newCells;
+    // // Perform the rotation since all new positions are valid
+    // for (size_t i = 0; i < occupiedCells.size(); ++i) {
+    //     occupiedCells[i]->setOccupied(false);
+    //     newCells[i]->setOccupied(true);
+    //     newCells[i]->setBlock(this);
+    // }
+    // occupiedCells = newCells;
 }
 
 void Block::rotateCounterClockwise() {

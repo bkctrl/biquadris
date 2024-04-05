@@ -2,13 +2,20 @@
 #include <algorithm>
 #include "grid.h"
 
+Grid::Grid(int playerId, TextDisplay* td): 
+    playerId{playerId}, gridWidth{11}, gridHeight{18}, td{td},
+    currentScore{0}, highScore{0}, currentLevelNumber{0}, currentLevel{nullptr}, activeBlock{nullptr},
+    nextBlock{nullptr}, blindModeActive{false}, heavyModeActive{false}, forceModeActive{false} {
+    init();
+}
+
 Grid::~Grid() {
     delete textDisplay;
     delete graphicsDisplay;
     clearBlocks();
 }
 
-void Grid::initialize() {
+void Grid::init() {
     theGrid.resize(gridHeight, std::vector<Cell>(gridWidth, Cell{0, 0, this}));
     for (int row = 0; row < gridHeight; row++) {
         for (int col = 0; col < gridWidth; col++) {

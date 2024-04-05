@@ -8,7 +8,7 @@
 class Cell;
 
 class GraphicsDisplay : public Observer {
-    Xwindow xw; 
+    // Xwindow xw; 
     const int gridSize; 
 
 public:

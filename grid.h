@@ -6,11 +6,11 @@
 #include "cell.h"
 #include "block.h"
 #include "textdisplay.h"
-#include "graphicsdisplay.h"
-#include "observer.h"
+// #include "graphicsdisplay.h"
+// #include "observer.h"
 #include "subject.h"
 
-class Level;
+// class Level;
 
 class Grid : public Subject {
 private:
@@ -22,6 +22,7 @@ private:
     Block* currentBlock;
     Block* nextBlock;
     int currentScore;
+    TextDisplay *textDisplay;
 
     // Private methods that are related to grid's state
     void clearBlocks();

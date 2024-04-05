@@ -2,7 +2,7 @@
 #include <string>
 
 Cell::Cell(int x, int y, Grid *grid): 
-    col{x}, row{y}, occupied{false}, block{nullptr}, parentGrid{grid} {}
+    col(x), row(y), occupied(false), block(nullptr), grid(grid) {}
 
 bool Cell::isOccupied() {
     return occupied;
