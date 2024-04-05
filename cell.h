@@ -2,12 +2,11 @@
 #define CELL_H
 
 #include <string>
-#include "subject.h"
 
 class Block;
 class Grid;
 
-class Cell : public Subject {
+class Cell {
     bool occupied; // true if cell is occupied
     Block* block; // block that is occupying the cell
     int col; // x position of the cell

@@ -3,11 +3,10 @@
 
 #include "cell.h"
 #include "observer.h"
-#include "subject.h"
 #include "grid.h"
 #include <vector>
 
-class Block : public Observer, public Subject {
+class Block : public Observer {
   protected:
     char letter; // The letter of the block
     int level; // The level at which the block was created

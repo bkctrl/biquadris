@@ -8,12 +8,11 @@
 #include "textdisplay.h"
 // #include "graphicsdisplay.h"
 // #include "observer.h"
-#include "subject.h"
 
 // class Level;
 class TextDisplay;
 
-class Grid : public Subject {
+class Grid {
 private:
     int gridHeight;
     int gridWidth;
@@ -22,7 +21,10 @@ private:
     Block* currentBlock;
     Block* nextBlock;
     int currentScore;
-    TextDisplay *textDisplay;
+    TextDisplay *td;
+    bool blindModeActive;
+    bool heavyModeActive;
+    bool forceModeActive;
 
     // Private methods that are related to grid's state
     void clearBlocks();
@@ -32,7 +34,9 @@ private:
     bool switchCurrentBlock(const std::string& blockType);
     
 public:
-    Grid(int player, TextDisplay* td);
+    int highScore;
+    // Grid(int player, TextDisplay* td);
+    Grid();
     ~Grid();
     std::vector< std::vector<Cell> > theGrid;
 
@@ -46,7 +50,7 @@ public:
 
     // void changeLevel(Level* newLevelPtr);
     // int getCurrentLevelNumber() const;
-    std::vector< std::vector<Cell> > accessGrid();
+    std::vector< std::vector<Cell> >& accessGrid();
     int getPlayerId() const;
     int getCurrentScore() const;
     void setCurrentScore(int score);

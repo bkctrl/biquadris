@@ -3,7 +3,6 @@
 
 #include "observer.h"
 #include <vector>
-class Cell;
 
 class Subject {
     std::vector<Observer*> observers;

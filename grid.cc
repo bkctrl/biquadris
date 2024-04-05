@@ -2,27 +2,28 @@
 #include <algorithm>
 #include "grid.h"
 
-Grid::Grid(int playerId, TextDisplay* td): 
-    playerId{playerId}, gridWidth{11}, gridHeight{18}, td(td),
+Grid::Grid(): 
+    playerId{}, gridWidth{11}, gridHeight{18}, td(nullptr),
     currentScore{0}, highScore{0},
     // currentLevelNumber{0}, currentLevel{nullptr},
-    activeBlock{nullptr},
-    nextBlock{nullptr}, blindModeActive{false}, heavyModeActive{false}, forceModeActive{false} {
+    currentBlock{nullptr}, nextBlock{nullptr}, blindModeActive{false}, heavyModeActive{false}, forceModeActive{false} {
     init();
 }
 
 Grid::~Grid() {
-    delete textDisplay;
+    delete td;
     // delete graphicsDisplay;
     clearBlocks();
 }
 
 void Grid::init() {
     theGrid.resize(gridHeight, std::vector<Cell>(gridWidth, Cell{0, 0, this}));
+    delete td;
+    td = new TextDisplay();
     for (int row = 0; row < gridHeight; row++) {
         for (int col = 0; col < gridWidth; col++) {
             theGrid[row][col] = Cell(col, row, this);
-            theGrid[row][col].attach(textDisplay); // Attach textDisplay to each cell
+            theGrid[row][col].attach(td); // Attach textDisplay to each cell
             // if (graphicsDisplay) {
             //     theGrid[row][col].attach(graphicsDisplay);
             // }
@@ -39,7 +40,7 @@ void Grid::reset() {
     heavyModeActive = false;
     forceModeActive = false;
     clearBlocks();
-    activeBlock = nullptr;
+    currentBlock = nullptr;
     nextBlock = nullptr;
     for (int row = 0; row < gridHeight; row++) {
         for (int col = 0; col < gridWidth; col++) {
@@ -60,11 +61,11 @@ Block* Grid::getNextBlock() const {
 }
 
 Block* Grid::getCurrentBlock() const {
-    return activeBlock;
+    return currentBlock;
 }
 
 int Grid::clearFullLines() {
-    vector<int> fullLines;
+    std::vector<int> fullLines;
     for (int row = 0; row < gridHeight; row++) {
         bool fullLine = true;
         for (int col = 0; col < gridWidth; col++) {
@@ -84,7 +85,7 @@ int Grid::clearFullLines() {
     return fullLines.size();
 }
 
-void Grid::removeLines(const vector<int>& fullLines) {
+void Grid::removeLines(const std::vector<int>& fullLines) {
     for (int row : fullLines) {
         for (int col = 0; col < gridWidth; col++) {
             theGrid[row][col].updateCell(false, nullptr);
@@ -101,7 +102,7 @@ int Grid::getPlayerId() const {
     return playerId;
 }
 
-vector<vector<Cell>>& Grid::accessGrid() {
+std::vector<std::vector<Cell>>& Grid::accessGrid() {
     return theGrid;
 }
 

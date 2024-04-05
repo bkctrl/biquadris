@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
 #include "grid.h"
-#include "commandinterpreter.h"
+#include "textdisplay.h"
+// #include "commandinterpreter.h"
 
 int main(const int argc, const char* argv[]) {
   // initialize grid and command interpreter
-  Grid grid();
+  Grid grid;
   // CommandInterpreter cmdInterpreter(&grid); 
   // command-line interface
 //   for (int i = 1; i < argc; ++i) {
