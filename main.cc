@@ -23,7 +23,9 @@ int main(const int argc, const char* argv[]) {
 //       // Starts the game in level argv[i+1]
 //     }
 //   }
+  // display the grid
     std::cout << grid;
+  
   // get user input from cin
   /*string user_input;
   while (getline(cin, user_input)) {

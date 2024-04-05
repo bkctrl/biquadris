@@ -5,19 +5,18 @@
 #include <unordered_map>
 #include <functional>
 #include "gameengine.h"
-#include "grid.h"
 
 class CommandInterpreter {
-private:
-    GameEngine* gameEngine;
-    Grid* grid;
-    std::unordered_map<std::string, std::function<void()>> commandMap;
+    GameEngine& gameEngine;
+    std::unordered_map<std::string, std::function<void(int)>> commandMap;
 
-    void initializeCommands();
+    // Helper methods for commands
+    void registerCommands();
+    void executeRotate(bool clockwise, int multiplier);
 
 public:
-    explicit CommandInterpreter(GameEngine& engine, Grid& grid);
-    void interpretCommand(const std::string& input);
+    CommandInterpreter(GameEngine& engine);
+    void executeCommand(const std::string& command, int multiplier);
 };
 
-#endif //COMMANDINTERPRETER_H
+#endif // COMMANDINTERPRETER_H
