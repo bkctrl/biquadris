@@ -1,12 +1,8 @@
 #include "block.h"
 
-Block::Block(char type, int orientation, Grid& grid, int row, int col, int level) 
-    : letter(type), orientation(orientation), grid(grid), row(row), col(col), 
-    level(level) {}
+Block::Block(char type, int orientation, Grid& grid, int bottomRow, int leftCol, int level) 
+    : letter(type), orientation(orientation), grid(grid), bottomRow(bottomRow), leftCol(leftCol), level(level) {}
 
-// Block::blockType getType() { return type; } // return the type of block
-// block:: validity check 
-// pass in: newmovement (ptrs to 4 cells that represents the final destination) + actual block (char)
 
 Block::~Block() {
   for (Cell* cell : blockCells) {
@@ -157,14 +153,6 @@ void Block::rotateCounterClockwise() {
   // notifyObservers();
 }
 
-// void Block::setHeavy(int newHeavy) {
-//   heavy = newHeavy;
-// }
-
-// int Block::getHeavy() {
-//   return heavy;
-// }
-
 // ---------------------------------- ROTATIONS ----------------------------------
 
 void Block::shiftLeft() {
@@ -175,9 +163,11 @@ void Block::shiftLeft() {
     int newRow = cell->getRow();
     if (level == 3 || level == 4) ++newRow;
     if (isHeavy) newRow += 2;
-    if (!isValidPlacement(newRow, newCol)) {
-      isValid = false;
-      break;
+    // item == grid.accessGrid()[newRow][newCol]
+    if (!isValidPlacement(newRow, newCol) &&
+         std::find(blockCells.begin(), blockCells.end(), grid.accessGrid()[newRow][newCol]) == blockCells.end()) {
+            isValid = false;  
+            break;
     }
   }
   if (isValid) {
@@ -199,9 +189,10 @@ void Block::shiftRight() {
     int newRow = cell->getRow();
     if (level == 3 || level == 4) ++newRow;
     if (isHeavy) newRow += 2;
-    if (!isValidPlacement(newRow, newCol)) {
-      isValid = false;
-      break;
+    if (!isValidPlacement(newRow, newCol) &&
+         std::find(blockCells.begin(), blockCells.end(), grid.accessGrid()[newRow][newCol]) == blockCells.end()) {
+          isValid = false;
+          break;
     }
   }
   if (isValid) {
@@ -222,9 +213,10 @@ void Block::shiftDown() {
     int newCol = cell->getCol();
     int newRow = cell->getRow();
     if (level == 3 || level == 4) ++newRow;
-    if (!isValidPlacement(newRow, newCol)) {
-      isValid = false;
-      break;
+    if (!isValidPlacement(newRow, newCol) &&
+         std::find(blockCells.begin(), blockCells.end(), grid.accessGrid()[newRow][newCol]) == blockCells.end()) {
+          isValid = false;
+          break;
     }
   }
   if (isValid) {
@@ -236,8 +228,27 @@ void Block::shiftDown() {
   notifyObservers();
 }
 
-void hardDrop(); // drop the block to the lowest possible position
-void centerDrop(); // drop the block to the center of the grid
+void Block::hardDrop() {
+  bool canDrop = true;
+  int minRow = 17;
+  for (Cell* cell : blockCells) {
+    int newRow = cell->getRow();
+    for (int i = 0; i < 17-bottomRow; ++i) {
+      ++newRow;
+      if (!isValidPlacement(newRow, cell->getCol()) &&
+         std::find(blockCells.begin(), blockCells.end(), grid.accessGrid()[newRow][cell->getCol()]) == blockCells.end()) { // a cell collides with a cell of another block
+         // this means check the next cell in blockcells
+        if (newRow-1 < minRow) minRow = newRow - 1; // collision at newRow
+        break;
+      }
+    }
+  }
+  for (Cell* cell : blockCells) {
+    cell->shiftRow(minRow - bottomRow);
+  }
+  notifyObservers();
+}
+
 
 
 // // This `update` method is called when the Block as an Observer
@@ -262,7 +273,7 @@ void IBlock::rotateCounterClockwise() {
   // Block::rotateCounterClkwise();
 }
 
-JBlock::JBlock(Grid& grid, int level) : Block('I', 0, grid, 7, 2, level) {
+JBlock::JBlock(Grid& grid, int level) : Block('J', 0, grid, 7, 2, level) {
   init();
 }
 void JBlock::rotateClockwise() { 
@@ -272,7 +283,7 @@ void JBlock::rotateCounterClockwise() {
   // Block::rotateCounterClkwise();
 }
 
-LBlock::LBlock(Grid& grid, int level) : Block('I', 0, grid, 7, 2, level) {
+LBlock::LBlock(Grid& grid, int level) : Block('L', 0, grid, 7, 2, level) {
   init();
 }
 void LBlock::rotateClockwise() { 
@@ -282,17 +293,13 @@ void LBlock::rotateCounterClockwise() {
   // Block::rotateCounterClkwise();
 }
 
-OBlock::OBlock(Grid& grid, int level) : Block('I', 0, grid, 7, 2, level) {
+OBlock::OBlock(Grid& grid, int level) : Block('O', 0, grid, 7, 2, level) {
   init();
 }
-void OBlock::rotateClockwise() { 
-  // Block::rotateClkwise();
-}
-void OBlock::rotateCounterClockwise() {
-  // Block::rotateCounterClkwise();
-}
+void OBlock::rotateClockwise() {}
+void OBlock::rotateCounterClockwise() {}
 
-SBlock::SBlock(Grid& grid, int level) : Block('I', 0, grid, 7, 2, level) {
+SBlock::SBlock(Grid& grid, int level) : Block('S', 0, grid, 7, 2, level) {
   init();
 }
 void SBlock::rotateClockwise() { 
@@ -302,7 +309,7 @@ void SBlock::rotateCounterClockwise() {
   // Block::rotateCounterClkwise();
 }
 
-ZBlock::ZBlock(Grid& grid, int level) : Block('I', 0, grid, 7, 2, level) {
+ZBlock::ZBlock(Grid& grid, int level) : Block('Z', 0, grid, 7, 2, level) {
   init();
 }
 void ZBlock::rotateClockwise() { 
@@ -312,7 +319,7 @@ void ZBlock::rotateCounterClockwise() {
   // Block::rotateCounterClkwise();
 }
 
-TBlock::TBlock(Grid& grid, int level) : Block('I', 0, grid, 7, 2, level) {
+TBlock::TBlock(Grid& grid, int level) : Block('T', 0, grid, 7, 2, level) {
   init();
 }
 void TBlock::rotateClockwise() { 
@@ -322,246 +329,9 @@ void TBlock::rotateCounterClockwise() {
   // Block::rotateCounterClkwise();
 }
 
-StarBlock::StarBlock(Grid& grid, int level) : Block('I', 0, grid, 7, 2, level) {
+StarBlock::StarBlock(Grid& grid, int level) : Block('*', 0, grid, 7, 2, level) {
   init();
 }
-void StarBlock::rotateClockwise() { 
-  // Block::rotateClkwise();
-}
-void StarBlock::rotateCounterClockwise() {
-  // Block::rotateCounterClkwise();
-}
+void StarBlock::rotateClockwise() {}
+void StarBlock::rotateCounterClockwise() {}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // void IBlock::display() const {
-
-// // }
-
-
-// void JBlock::rotateClkwise() {
-//   // Block::rotateClkwise();
-// }
-
-// void JBlock::rotateCounterClkwise() {
-//   // Block::rotateCounterClkwise();
-// }
-
-// void JBlock::shiftLeft() {
-//   Block::shiftLe);
-// }
-
-// void JBlock::shiftRight() {
-//   Block::shiftRig);
-// }
-
-// void JBlock::shiftUp() {
-//   Block::shift);
-// }
-
-// void JBlock::shiftDown() {
-//   Block::shiftDo);
-// }
-
-// // void JBlock::display() const {
-
-// // }
-
-
-// void LBlock::rotateClkwise() {
-//   // Block::rotateClkwise();
-// }
-
-// void LBlock::rotateCounterClkwise() {
-//   // Block::rotateCounterClkwise();
-// }
-
-// void LBlock::shiftLeft() {
-//   Block::shiftLe);
-// }
-
-// void LBlock::shiftRight() {
-//   Block::shiftRig);
-// }
-
-// void LBlock::shiftUp() {
-//   Block::shift);
-// }
-
-// void LBlock::shiftDown() {
-//   Block::shiftDo);
-// }
-
-// // void LBlock::display() const {
-
-// // }
-
-
-
-// // rotation on a OBlock effectively has no effect
-// void OBlock::rotateClkwise() {
-// }
-
-// void OBlock::rotateCounterClkwise() {
-// }
-
-// void OBlock::shiftLeft() {
-//   Block::shiftLe);
-// }
-
-// void OBlock::shiftRight() {
-//   Block::shiftRig);
-// }
-
-// void OBlock::shiftUp() {
-//   Block::shift);
-// }
-
-// void OBlock::shiftDown() {
-//   Block::shiftDo);
-// }
-
-// // void OBlock::display() const {
-
-// // }
-
-
-
-// void SBlock::rotateClkwise() {
-//   // Block::rotateClkwise();
-// }
-
-// void SBlock::rotateCounterClkwise() {
-//   // Block::rotateCounterClkwise();
-// }
-
-// void SBlock::shiftLeft() {
-//   Block::shiftLe);
-// }
-
-// void SBlock::shiftRight() {
-//   Block::shiftRig);
-// }
-
-// void SBlock::shiftUp() {
-//   Block::shift);
-// }
-
-// void SBlock::shiftDown() {
-//   Block::shiftDo);
-// }
-
-// // void SBlock::display() const {
-
-// // }
-
-
-
-// void ZBlock::rotateClkwise() {
-//   // Block::rotateClkwise();
-// }
-
-// void ZBlock::rotateCounterClkwise() {
-//   // Block::rotateCounterClkwise();
-// }
-
-// void ZBlock::shiftLeft() {
-//   Block::shiftLe);
-// }
-
-// void ZBlock::shiftRight() {
-//   Block::shiftRig);
-// }
-
-// void ZBlock::shiftUp() {
-//   Block::shift);
-// }
-
-// void ZBlock::shiftDown() {
-//   Block::shiftDo);
-// }
-
-// // void ZBlock::display() const {
-
-// // }
-
-
-
-// void TBlock::rotateClkwise() {
-//   // Block::rotateClkwise();
-// }
-
-// void TBlock::rotateCounterClkwise() {
-//   // Block::rotateCounterClkwise();
-// }
-
-// void TBlock::shiftLeft() {
-//   Block::shiftLe);
-// }
-
-// void TBlock::shiftRight() {
-//   Block::shiftRig);
-// }
-
-// void TBlock::shiftUp() {
-//   Block::shift);
-// }
-
-// void TBlock::shiftDown() {
-//   Block::shiftDo);
-// }
-
-// // void TBlock::display() const {
-
-// // }
-
-
-// // StarBlock
-
-// StarBlock::StarBlock(int lvl, const char letter) : Block(lvl, letter) {
-//   init(); 
-// }
-
-// void StarBlock::init() {
-//   blockCells.push_back(new Cell(0, 0));
-//   for (Cell* cell : blockCells) cell->setLetter('*');
-// }
-
-// // rotation on a StarBlock effectively has no effect
-// void StarBlock::rotateClkwise() {
-// }
-
-// void StarBlock::rotateCounterClkwise() {
-// }
-
-// void StarBlock::shiftLeft() {
-//   Block::shiftLe);
-// }
-
-// void StarBlock::shiftRight() {
-//   Block::shiftRig);
-// }
-
-// void StarBlock::shiftUp() {
-//   Block::shift);
-// }
-
-// void StarBlock::shiftDown() {
-//   Block::shiftDo);
-// }
-
-// // void StarBlock::display() const {
-
-// // }
